@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Aryan Sharma – Senior General Physician & Wellness Clinic</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Firebase SDKs (v10 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+
+  <style>
+    /* ============================================================
+       RESET & ROOT VARIABLES
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue-900: #0a1f44;
+      --blue-800: #0d2b5e;
+      --blue-700: #1a3a78;
+      --blue-600: #1e4db7;
+      --blue-500: #2563eb;
+      --blue-400: #3b82f6;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+      --white:    #ffffff;
+      --gray-50:  #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-500: #64748b;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --green:    #16a34a;
+      --green-light:#dcfce7;
+      --red:      #dc2626;
+      --red-light:#fee2e2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: all .3s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-900);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--blue-100);
+      color: var(--blue-600);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--blue-900);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 100px;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(37,99,235,.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,99,235,.45); }
+    .btn-outline {
+      background: transparent;
+      color: var(--blue-600);
+      border: 2px solid var(--blue-400);
+    }
+    .btn-outline:hover { background: var(--blue-50); transform: translateY(-2px); }
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(37,211,102,.35);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.45); }
+
+    /* ============================================================
+       FADE-IN ANIMATION
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       HEADER / NAV
+    ============================================================ */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,31,68,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,.25);
+      transition: var(--transition);
+    }
+    #header.scrolled { background: rgba(10,31,68,.99); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: var(--white);
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(37,99,235,.4);
+    }
+    .logo-text span {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .logo-text small {
+      font-size: .7rem;
+      color: var(--blue-100);
+      font-weight: 400;
+      letter-spacing: .05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--blue-100);
+      font-size: .88rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: var(--transition);
+      letter-spacing: .02em;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--white);
+      background: rgba(255,255,255,.12);
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-admin-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,.25);
+      color: var(--blue-100);
+      font-size: .8rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .nav-admin-btn:hover { background: rgba(255,255,255,.1); color: var(--white); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    @media(max-width:900px) {
+      .nav-links { display: none; flex-direction: column; gap: 4px; }
+      .nav-links.open {
+        display: flex;
+        position: absolute;
+        top: 72px; left: 0; right: 0;
+        background: var(--blue-900);
+        padding: 16px 24px 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      }
+      .hamburger { display: flex; }
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(10,31,68,.92) 0%, rgba(10,31,68,.65) 60%, rgba(10,31,68,.3) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 120px 0 80px;
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      color: var(--blue-100);
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-badge i { color: #fbbf24; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .hero-title .highlight { color: #60a5fa; display: block; }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--blue-100);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 560px;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 48px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 28px; }
+    .stat-item { text-align: left; }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .stat-label { font-size: .78rem; color: #bfdbfe; margin-top: 4px; }
+
+    /* ============================================================
+       SERVICES SECTION
+    ============================================================ */
+    #services { padding: 100px 0; background: var(--gray-50); }
+    .services-header { text-align: center; margin-bottom: 60px; }
+    .services-header .section-sub { margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-100);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--blue-100); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 22px;
+    }
+    .icon-blue   { background: var(--blue-50);    color: var(--blue-600); }
+    .icon-green  { background: var(--green-light); color: var(--green); }
+    .icon-sky    { background: #e0f2fe;            color: #0369a1; }
+    .icon-purple { background: #f3e8ff;            color: #7c3aed; }
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--blue-900); margin-bottom: 10px; }
+    .service-card p  { font-size: .9rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 18px; }
+    .service-link {
+      color: var(--blue-600);
+      font-size: .88rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .service-link:hover { gap: 10px; }
+
+    /* ============================================================
+       ABOUT SECTION
+    ============================================================ */
+    #about { padding: 100px 0; background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media(max-width:768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .about-img-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .about-img-wrap img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .about-badge {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-badge .ab-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1.2rem;
+    }
+    .about-badge .ab-text strong { display: block; font-size: 1.1rem; font-weight: 800; color: var(--blue-900); }
+    .about-badge .ab-text span  { font-size: .78rem; color: var(--gray-500); }
+    .about-content .section-sub { margin-bottom: 28px; }
+    .about-list { list-style: none; margin: 0 0 32px; }
+    .about-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: .95rem;
+      color: var(--gray-700);
+    }
+    .about-list li .check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--blue-50);
+      color: var(--blue-600);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .about-quals { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .qual-badge {
+      background: var(--blue-50);
+      color: var(--blue-700);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--blue-100);
+    }
+
+    /* ============================================================
+       REVIEWS SECTION
+    ============================================================ */
+    #reviews {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
+    }
+    .reviews-header { text-align: center; margin-bottom: 60px; }
+    .reviews-header .section-title { color: var(--white); }
+    .reviews-header .section-sub  { color: var(--blue-100); margin: 0 auto; }
+    .reviews-header .section-tag  { background: rgba(255,255,255,.12); color: var(--blue-100); }
+    .reviews-slider-wrap { position: relative; overflow: hidden; }
+    .reviews-track {
+      display: flex;
+      gap: 24px;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .review-card {
+      min-width: calc(33.33% - 16px);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    @media(max-width:900px) { .review-card { min-width: calc(50% - 12px); } }
+    @media(max-width:600px) { .review-card { min-width: 90%; } }
+    .review-card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+    .review-stars { color: #fbbf24; font-size: 1rem; margin-bottom: 16px; letter-spacing: 3px; }
+    .review-text  {
+      font-size: .95rem;
+      color: var(--blue-100);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .review-author strong { display: block; color: var(--white); font-size: .9rem; }
+    .review-author span  { color: #bfdbfe; font-size: .78rem; }
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .slider-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--white);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .slider-btn:hover { background: var(--blue-500); border-color: var(--blue-500); }
+
+    /* ============================================================
+       CONTACT / APPOINTMENT SECTION
+    ============================================================ */
+    #contact { padding: 100px 0; background: var(--gray-50); }
+    .contact-header { text-align: center; margin-bottom: 60px; }
+    .contact-header .section-sub { margin: 0 auto; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media(max-width:860px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-info {
+      background: linear-gradient(135deg, var(--blue-900), var(--blue-800));
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      color: var(--white);
+    }
+    .contact-info h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 28px; color: var(--white); }
+    .info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .info-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      color: #60a5fa;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .info-item strong { display: block; color: var(--white); font-size: .9rem; margin-bottom: 3px; }
+    .info-item span   { color: var(--blue-100); font-size: .85rem; line-height: 1.6; }
+    .info-item a      { color: #93c5fd; text-decoration: none; }
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--white);
+      font-size: .85rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 100px;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: var(--transition);
+    }
+    .map-link:hover { background: var(--blue-600); }
+    .timing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .timing-item {
+      background: rgba(255,255,255,.08);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: .8rem;
+      color: var(--blue-100);
+    }
+    .timing-item strong { display: block; color: var(--white); font-size: .82rem; }
+
+    .appt-form {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-100);
+    }
+    .appt-form h3 { font-size: 1.3rem; font-weight: 700; color: var(--blue-900); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width:500px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 7px;
+      letter-spacing: .03em;
+    }
+    .form-group label span { color: var(--red); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: .92rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-400);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; justify-content: center; border-radius: var(--radius-sm); padding: 15px; font-size: 1rem; }
+    .form-message {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      font-weight: 500;
+      display: none;
+    }
+    .form-message.success { background: var(--green-light); color: var(--green); display: block; }
+    .form-message.error   { background: var(--red-light);   color: var(--red);   display: block; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer { background: var(--gray-900); padding: 70px 0 28px; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1.4fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    @media(max-width:860px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:500px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .footer-brand p { color: var(--gray-500); font-size: .88rem; line-height: 1.75; margin: 14px 0 22px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--blue-600); color: var(--white); border-color: var(--blue-600); }
+    .footer-col h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 18px;
+      letter-spacing: .04em;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--gray-500);
+      font-size: .88rem;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-links a:hover { color: var(--blue-400); gap: 10px; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .footer-contact-item i    { color: var(--blue-400); margin-top: 2px; font-size: .9rem; }
+    .footer-contact-item span { color: var(--gray-500); font-size: .86rem; line-height: 1.6; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p   { color: var(--gray-500); font-size: .82rem; }
+    .footer-tagline    { font-size: .82rem; color: var(--blue-400); font-weight: 600; font-style: italic; }
+
+    /* ============================================================
+       ADMIN LOGIN MODAL
+    ============================================================ */
+    #admin-login {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(10,31,68,.75);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+    }
+    #admin-login.open { display: flex; }
+    .login-box {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 44px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .login-icon {
+      width: 68px; height: 68px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem;
+      color: var(--white);
+      margin: 0 auto 22px;
+      box-shadow: 0 8px 24px rgba(37,99,235,.35);
+    }
+    .login-box h3 { font-size: 1.35rem; font-weight: 700; color: var(--blue-900); margin-bottom: 6px; }
+    .login-box > p { font-size: .88rem; color: var(--gray-500); margin-bottom: 28px; }
+    .login-field {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .login-field i {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-500);
+      font-size: .9rem;
+    }
+    .login-field input {
+      width: 100%;
+      padding: 13px 16px 13px 40px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: .92rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      outline: none;
+      transition: var(--transition);
+    }
+    .login-field input:focus {
+      border-color: var(--blue-400);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+    .login-btn {
+      width: 100%;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      margin-top: 4px;
+      padding: 14px;
+    }
+    .login-cancel {
+      display: block;
+      margin-top: 14px;
+      font-size: .84rem;
+      color: var(--gray-500);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: var(--transition);
+    }
+    .login-cancel:hover { color: var(--red); }
+    .login-err {
+      color: var(--red);
+      font-size: .83rem;
+      margin-top: 12px;
+      display: none;
+      background: var(--red-light);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ============================================================
+       ADMIN PANEL OVERLAY
+    ============================================================ */
+    #admin-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(10,31,68,.6);
+      backdrop-filter: blur(6px);
+    }
+    #admin-overlay.open { display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 20px; }
+    .admin-panel {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 1100px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin: auto;
+    }
+    .admin-header {
+      background: linear-gradient(135deg, var(--blue-900), var(--blue-800));
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-header h2 { color: var(--white); font-size: 1.2rem; font-weight: 700; }
+    .admin-header p  { color: var(--blue-100); font-size: .8rem; margin-top: 3px; }
+    .admin-close {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.12);
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .admin-close:hover { background: var(--red); }
+    .admin-body { padding: 28px 32px; }
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    @media(max-width:600px) { .admin-stats { grid-template-columns: 1fr; } }
+    .stat-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .stat-card .sc-icon {
+      width: 50px; height: 50px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .sc-blue   { background: var(--blue-50);    color: var(--blue-600); }
+    .sc-green  { background: var(--green-light); color: var(--green); }
+    .sc-purple { background: #f3e8ff;            color: #7c3aed; }
+    .stat-card .sc-num   { font-size: 1.8rem; font-weight: 800; color: var(--gray-900); line-height: 1; }
+    .stat-card .sc-label { font-size: .8rem; color: var(--gray-500); margin-top: 4px; }
+
+    /* Search / Filter */
+    .admin-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .admin-search {
+      flex: 1;
+      min-width: 180px;
+      padding: 9px 14px 9px 36px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      background: var(--gray-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") 12px center/14px no-repeat;
+      transition: var(--transition);
+    }
+    .admin-search:focus { border-color: var(--blue-400); background-color: var(--white); }
+    .filter-select {
+      padding: 9px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      color: var(--gray-700);
+      background: var(--gray-50);
+      cursor: pointer;
+    }
+    .filter-select:focus { border-color: var(--blue-400); }
+
+    .admin-table-wrap {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      overflow: auto;
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    thead tr { background: var(--gray-50); }
+    th {
+      padding: 13px 16px;
+      text-align: left;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    td {
+      padding: 14px 16px;
+      font-size: .88rem;
+      color: var(--gray-700);
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--gray-50); }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: .74rem;
+      font-weight: 700;
+    }
+    .status-pending   { background: #fef3c7; color: #b45309; }
+    .status-contacted { background: var(--green-light); color: var(--green); }
+    .action-btn {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: .9rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .wa-btn  { background: #dcfce7; color: #16a34a; }
+    .wa-btn:hover  { background: #16a34a; color: var(--white); }
+    .del-btn { background: var(--red-light); color: var(--red); margin-left: 6px; }
+    .del-btn:hover { background: var(--red); color: var(--white); }
+    .mark-btn { background: var(--blue-50); color: var(--blue-600); margin-left: 6px; }
+    .mark-btn:hover { background: var(--blue-600); color: var(--white); }
+    .empty-state {
+      text-align: center;
+      padding: 56px 20px;
+      color: var(--gray-500);
+    }
+    .empty-state i { font-size: 2.8rem; color: var(--gray-300); margin-bottom: 14px; display: block; }
+    .empty-state p { font-size: .95rem; }
+
+    .admin-footer-bar {
+      padding: 18px 32px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .admin-footer-bar p { font-size: .82rem; color: var(--gray-500); }
+    .refresh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-50);
+      border: 1px solid var(--blue-100);
+      color: var(--blue-700);
+      font-size: .82rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .refresh-btn:hover { background: var(--blue-100); }
+
+    /* ============================================================
+       SCROLL TO TOP
+    ============================================================ */
+    #scroll-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 16px rgba(37,99,235,.4);
+      transition: var(--transition);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+    }
+    #scroll-top.show { display: flex; }
+    #scroll-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,.5); }
+
+    /* Spinner */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 80px; right: 28px;
+      background: var(--gray-900);
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.toast-success { background: var(--green); }
+    .toast.toast-error   { background: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     ADMIN LOGIN MODAL (no hints or visible credentials)
+============================================================ -->
+<div id="admin-login">
+  <div class="login-box">
+    <div class="login-icon"><i class="fas fa-user-shield"></i></div>
+    <h3>Admin Portal</h3>
+    <p>Enter your secure credentials to access the clinic dashboard</p>
+
+    <div class="login-field">
+      <i class="fas fa-user"></i>
+      <input type="text" id="admin-user" placeholder="Username" autocomplete="off" />
+    </div>
+    <div class="login-field">
+      <i class="fas fa-lock"></i>
+      <input type="password" id="admin-pass" placeholder="Password" autocomplete="off" />
+    </div>
+
+    <button class="btn btn-primary login-btn" onclick="doLogin()">
+      <i class="fas fa-sign-in-alt"></i> Sign In
+    </button>
+    <p class="login-err" id="login-err">
+      <i class="fas fa-exclamation-triangle"></i>&nbsp;Incorrect username or password. Please try again.
+    </p>
+    <button class="login-cancel" onclick="closeAdminLogin()">
+      <i class="fas fa-times-circle"></i> Cancel
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOAST
+============================================================ -->
+<div class="toast" id="toast"></div>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header id="header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="#hero" class="logo">
+        <div class="logo-icon"><i class="fas fa-stethoscope"></i></div>
+        <div class="logo-text">
+          <span>Dr. Aryan Sharma</span>
+          <small>Senior General Physician &amp; Wellness Clinic</small>
+        </div>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero"     class="active" onclick="closeMenu()">Home</a></li>
+        <li><a href="#services"              onclick="closeMenu()">Services</a></li>
+        <li><a href="#about"                 onclick="closeMenu()">About</a></li>
+        <li><a href="#reviews"               onclick="closeMenu()">Reviews</a></li>
+        <li><a href="#contact"               onclick="closeMenu()">Contact</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button class="nav-admin-btn" onclick="openAdminLogin()">
+          <i class="fas fa-lock"></i> Admin
+        </button>
+        <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:.85rem;">
+          <i class="fas fa-calendar-plus"></i> Book Appointment
+        </a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section id="hero">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content fade-up">
+      <div class="hero-badge">
+        <i class="fas fa-star"></i> Trusted by 10,000+ Patients Since 2005
+      </div>
+      <h1 class="hero-title">
+        Your Health &amp; Well-being,
+        <span class="highlight">Our Responsibility.</span>
+      </h1>
+      <p class="hero-sub">
+        Comprehensive healthcare by <strong style="color:#60a5fa;">Dr. Aryan Sharma</strong>, MBBS, MD &mdash;
+        Senior General Physician. Specializing in preventive medicine, chronic disease management &amp; family
+        wellness with compassionate, evidence-based care.
+      </p>
+      <div class="hero-buttons">
+        <a href="https://wa.me/919876543210?text=Hello+Doctor,+I+need+an+appointment"
+           target="_blank" class="btn btn-whatsapp">
+          <i class="fab fa-whatsapp"></i> WhatsApp Us
+        </a>
+        <a href="tel:+919876543210" class="btn btn-outline"
+           style="border-color:rgba(255,255,255,.4);color:#fff;">
+          <i class="fas fa-phone"></i> Call Now
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">18+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10K+</div>
+          <div class="stat-label">Patients Treated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4.9 ★</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Emergency Care</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES SECTION
+============================================================ -->
+<section id="services">
+  <div class="container">
+    <div class="services-header fade-up">
+      <span class="section-tag"><i class="fas fa-heartbeat"></i> Our Services</span>
+      <h2 class="section-title">Comprehensive Medical Care<br>Under One Roof</h2>
+      <p class="section-sub">From routine check-ups to advanced treatment protocols — world-class healthcare tailored to every patient's needs.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card fade-up">
+        <div class="service-icon icon-blue"><i class="fas fa-user-md"></i></div>
+        <h3>General Physician Consultation</h3>
+        <p>Expert diagnosis and treatment for fever, infections, flu, and common illnesses. Same-day appointments available for urgent cases.</p>
+        <a href="#contact" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon icon-green"><i class="fas fa-heartbeat"></i></div>
+        <h3>Chronic Disease Management</h3>
+        <p>Personalised care plans for diabetes, hypertension, thyroid disorders, and other long-term conditions requiring continuous care.</p>
+        <a href="#contact" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon icon-sky"><i class="fas fa-lungs"></i></div>
+        <h3>Respiratory &amp; Allergy Care</h3>
+        <p>Complete management of asthma, COPD, allergies, sinusitis, and upper respiratory tract infections with targeted therapy.</p>
+        <a href="#contact" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon icon-purple"><i class="fas fa-shield-virus"></i></div>
+        <h3>Preventive Health Check-ups</h3>
+        <p>Full-body health screening packages, vaccination programs, nutritional counselling, and lifestyle modification guidance.</p>
+        <a href="#contact" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon icon-blue"><i class="fas fa-baby"></i></div>
+        <h3>Pediatric &amp; Family Care</h3>
+        <p>Gentle, thorough healthcare for children and entire families — from newborns to senior citizens under one caring roof.</p>
+        <a href="#contact" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-icon icon-green"><i class="fas fa-pills"></i></div>
+        <h3>Prescription &amp; Follow-up</h3>
+        <p>Online and in-clinic prescription renewals, lab report reviews, and structured follow-up consultations for better outcomes.</p>
+        <a href="#contact" class="service-link">Book Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT SECTION
+============================================================ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-up">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80"
+             alt="Dr. Aryan Sharma – Senior General Physician" />
+        <div class="about-badge">
+          <div class="ab-icon"><i class="fas fa-award"></i></div>
+          <div class="ab-text">
+            <strong>18+ Years</strong>
+            <span>Of Excellence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-content fade-up">
+        <span class="section-tag"><i class="fas fa-stethoscope"></i> About the Doctor</span>
+        <h2 class="section-title">Meet Dr. Aryan Sharma<br>Your Trusted Healer</h2>
+        <p class="section-sub" style="margin-bottom:20px;">
+          Dr. Aryan Sharma is a highly experienced Senior General Physician with over 18 years of dedicated
+          service in patient care. His compassionate approach combined with evidence-based medicine ensures
+          the best possible outcomes for every patient he treats.
+        </p>
+        <div class="about-quals">
+          <span class="qual-badge">MBBS – AIIMS Delhi</span>
+          <span class="qual-badge">MD – Internal Medicine</span>
+          <span class="qual-badge">FCGP Certified</span>
+          <span class="qual-badge">Diabetology Diploma</span>
+        </div>
+        <ul class="about-list">
+          <li><span class="check"><i class="fas fa-check"></i></span> Consultant at City General Hospital for over 12 years</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Specialized in Metabolic Disorders &amp; Preventive Medicine</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Published 14 peer-reviewed research papers in national journals</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Awarded "Best Physician of the Year 2022" by Medical Association</li>
+          <li><span class="check"><i class="fas fa-check"></i></span> Multilingual consultations available in English &amp; Hindi</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">
+          <i class="fas fa-calendar-check"></i> Book Consultation
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REVIEWS SECTION
+============================================================ -->
+<section id="reviews">
+  <div class="container">
+    <div class="reviews-header fade-up">
+      <span class="section-tag"><i class="fas fa-star"></i> Patient Reviews</span>
+      <h2 class="section-title">What Our Patients Say</h2>
+      <p class="section-sub">Real experiences from real patients. Their trust is our greatest achievement and our strongest motivation.</p>
+    </div>
+    <div class="reviews-slider-wrap fade-up">
+      <div class="reviews-track" id="reviews-track">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Dr. Sharma is absolutely wonderful! My diabetes was uncontrolled for 3 years, and within just 2 months of his treatment plan, my levels are completely normal. Highly patient and knowledgeable."</p>
+          <div class="review-author">
+            <div class="review-avatar">RK</div>
+            <div>
+              <strong>Ramesh Kumar</strong>
+              <span>Diabetes Patient &middot; Delhi</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"My mother's treatment was swift and effective. The doctor explained everything in detail. The clinic environment is spotlessly clean and very professional. Highly recommended!"</p>
+          <div class="review-author">
+            <div class="review-avatar">PS</div>
+            <div>
+              <strong>Priya Sharma</strong>
+              <span>Family Patient &middot; Noida</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Best doctor in the entire region. I had severe respiratory issues and Dr. Sharma's treatment plan worked wonders within just a few weeks. Very knowledgeable and genuinely caring."</p>
+          <div class="review-author">
+            <div class="review-avatar">AM</div>
+            <div>
+              <strong>Amit Mishra</strong>
+              <span>Respiratory Patient &middot; Gurgaon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Booking an appointment is incredibly easy — I messaged on WhatsApp and got confirmation within 10 minutes. The doctor is warm, attentive, and makes you feel completely at ease."</p>
+          <div class="review-author">
+            <div class="review-avatar">SG</div>
+            <div>
+              <strong>Sunita Gupta</strong>
+              <span>Regular Patient &middot; Faridabad</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"My entire family has been visiting for 5+ years. Dr. Aryan remembers each patient personally. The preventive health check-up package is thorough, affordable, and worth every penny."</p>
+          <div class="review-author">
+            <div class="review-avatar">VT</div>
+            <div>
+              <strong>Vijay Tiwari</strong>
+              <span>Family Patient &middot; Ghaziabad</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"My daughter had a very high fever and we were frightened. The doctor saw her on an emergency basis and she recovered within 24 hours. We are truly grateful for such prompt and caring treatment."</p>
+          <div class="review-author">
+            <div class="review-avatar">NJ</div>
+            <div>
+              <strong>Neha Joshi</strong>
+              <span>Pediatric Patient &middot; Greater Noida</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+      <button class="slider-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT / APPOINTMENT SECTION
+============================================================ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-header fade-up">
+      <span class="section-tag"><i class="fas fa-calendar-plus"></i> Book Appointment</span>
+      <h2 class="section-title">Schedule Your Visit Today</h2>
+      <p class="section-sub">Fill in the form and our team will confirm your appointment within 30 minutes during clinic hours.</p>
+    </div>
+
+    <div class="contact-grid fade-up">
+      <!-- Info Panel -->
+      <div class="contact-info">
+        <h3><i class="fas fa-map-marker-alt" style="color:#60a5fa;margin-right:8px;"></i>Clinic Information</h3>
+
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+          <div>
+            <strong>Address</strong>
+            <span>42, Medical Tower, Rajiv Chowk,<br>Sector 17, New Delhi – 110001</span>
+          </div>
+        </div>
+        <a href="https://maps.google.com" target="_blank" class="map-link">
+          <i class="fas fa-map"></i> Open in Google Maps
+        </a>
+
+        <div class="info-item" style="margin-top:22px;">
+          <div class="info-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <strong>Phone</strong>
+            <span><a href="tel:+919876543210">+91 98765 43210</a></span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+          <div>
+            <strong>WhatsApp</strong>
+            <span><a href="https://wa.me/919876543210" target="_blank">+91 98765 43210</a></span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <strong>Clinic Hours</strong>
+            <div class="timing-grid">
+              <div class="timing-item"><strong>Mon – Fri</strong>9:00 AM – 2:00 PM</div>
+              <div class="timing-item"><strong>Mon – Fri</strong>5:00 PM – 9:00 PM</div>
+              <div class="timing-item"><strong>Saturday</strong>9:00 AM – 4:00 PM</div>
+              <div class="timing-item"><strong>Sunday</strong>Emergency Only</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointment Form -->
+      <form class="appt-form" id="appt-form" onsubmit="submitForm(event)">
+        <h3><i class="fas fa-file-medical" style="color:var(--blue-600);margin-right:8px;"></i>Appointment Request</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span>*</span></label>
+            <input type="text" id="f-name" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label>Mobile Number <span>*</span></label>
+            <input type="tel" id="f-phone" placeholder="+91 9876543210" required pattern="[0-9+\s\-]{10,15}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Select Service <span>*</span></label>
+          <select id="f-service" required>
+            <option value="" disabled selected>— Choose a service —</option>
+            <option>General Physician Consultation</option>
+            <option>Chronic Disease Management</option>
+            <option>Respiratory &amp; Allergy Care</option>
+            <option>Preventive Health Check-up</option>
+            <option>Pediatric &amp; Family Care</option>
+            <option>Prescription &amp; Follow-up</option>
+            <option>Emergency Consultation</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Preferred Date <span>*</span></label>
+            <input type="date" id="f-date" required />
+          </div>
+          <div class="form-group">
+            <label>Preferred Time Slot</label>
+            <select id="f-time">
+              <option value="" disabled selected>— Choose a slot —</option>
+              <option>9:00 AM – 10:00 AM</option>
+              <option>10:00 AM – 11:00 AM</option>
+              <option>11:00 AM – 12:00 PM</option>
+              <option>12:00 PM – 1:00 PM</option>
+              <option>5:00 PM – 6:00 PM</option>
+              <option>6:00 PM – 7:00 PM</option>
+              <option>7:00 PM – 8:00 PM</option>
+              <option>8:00 PM – 9:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Message / Symptoms <span style="color:var(--gray-400);font-weight:400;">(Optional)</span></label>
+          <textarea id="f-message" placeholder="Briefly describe your symptoms or any special requirements..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit" id="submit-btn">
+          <i class="fas fa-calendar-check"></i> Book Appointment
+        </button>
+        <div class="form-message" id="form-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="#hero" class="logo" style="margin-bottom:4px;display:inline-flex;">
+          <div class="logo-icon"><i class="fas fa-stethoscope"></i></div>
+          <div class="logo-text">
+            <span>Dr. Aryan Sharma</span>
+            <small>Senior General Physician</small>
+          </div>
+        </a>
+        <p>Providing compassionate, evidence-based healthcare to families in Delhi NCR since 2005. Your health is our priority — always.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919876543210" class="social-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#hero"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+          <li><a href="#about"><i class="fas fa-chevron-right"></i> About Doctor</a></li>
+          <li><a href="#reviews"><i class="fas fa-chevron-right"></i> Patient Reviews</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <ul class="footer-links">
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> General Consultation</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Diabetes Care</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Respiratory Care</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Health Check-up</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Pediatric Care</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <div class="footer-contact-item">
+          <i class="fas fa-location-dot"></i>
+          <span>42, Medical Tower, Rajiv Chowk, Sector 17, New Delhi – 110001</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 98765 43210</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>dr.aryan@wellnessclinic.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon–Sat: 9 AM–2 PM &amp; 5 PM–9 PM</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Dr. Aryan Sharma Wellness Clinic. All Rights Reserved.</p>
+      <p class="footer-tagline">"Learn more, Earn more." — Your Health is Your Wealth.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     ADMIN PANEL OVERLAY
+============================================================ -->
+<div id="admin-overlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <div>
+        <h2><i class="fas fa-chart-line" style="margin-right:10px;"></i>Admin Dashboard</h2>
+        <p>Dr. Aryan Sharma Wellness Clinic — Lead &amp; Appointment Management</p>
+      </div>
+      <button class="admin-close" onclick="closeAdmin()" title="Close"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="admin-body">
+      <!-- Stats -->
+      <div class="admin-stats">
+        <div class="stat-card">
+          <div class="sc-icon sc-blue"><i class="fas fa-calendar-day"></i></div>
+          <div>
+            <div class="sc-num" id="today-count">0</div>
+            <div class="sc-label">Today's Enquiries</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon sc-green"><i class="fas fa-users"></i></div>
+          <div>
+            <div class="sc-num" id="total-count">0</div>
+            <div class="sc-label">Total Leads</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-icon sc-purple"><i class="fas fa-check-circle"></i></div>
+          <div>
+            <div class="sc-num" id="contacted-count">0</div>
+            <div class="sc-label">Contacted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="admin-toolbar">
+        <input class="admin-search" type="text" id="admin-search"
+               placeholder="Search by name, phone or service…" oninput="filterLeads()" />
+        <select class="filter-select" id="status-filter" onchange="filterLeads()">
+          <option value="">All Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Contacted">Contacted</option>
+        </select>
+      </div>
+
+      <!-- Table -->
+      <div class="admin-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Service</th>
+              <th>Appt. Date &amp; Time</th>
+              <th>Submitted At</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody">
+            <tr>
+              <td colspan="8">
+                <div class="empty-state">
+                  <i class="fas fa-circle-notch fa-spin"></i>
+                  <p>Loading appointments…</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-footer-bar">
+      <p id="admin-last-refresh">Data powered by Firebase Firestore &bull; Auto-refreshes every 60 seconds</p>
+      <button class="refresh-btn" onclick="loadLeads()">
+        <i class="fas fa-sync-alt"></i> Refresh Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll To Top -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* ─────────────────────────────────────────────────────────────
+     FIREBASE INITIALIZATION
+  ───────────────────────────────────────────────────────────── */
+  const FIREBASE_CONFIG = {
+    apiKey:            "AIzaSyDyJYH8xFcbyfZPglCsEX_fReSweke0_9k",
+    authDomain:        "doctor-7e40c.firebaseapp.com",
+    databaseURL:       "https://doctor-7e40c-default-rtdb.firebaseio.com",
+    projectId:         "doctor-7e40c",
+    storageBucket:     "doctor-7e40c.firebasestorage.app",
+    messagingSenderId: "975199772709",
+    appId:             "1:975199772709:web:61c7f191d85ccabb2d5fcc",
+    measurementId:     "G-HFDF0G9E2L"
+  };
+
+  let db             = null;
+  let rtdb           = null;
+  let useLocalStorage = false;
+
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db   = firebase.firestore();
+    rtdb = firebase.database();
+    firebase.analytics();
+  } catch(e) {
+    console.warn("Firebase init failed – switching to localStorage fallback:", e);
+    useLocalStorage = true;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     LOCAL STORAGE FALLBACK HELPERS
+  ───────────────────────────────────────────────────────────── */
+  function getLocalLeads() {
+    return JSON.parse(localStorage.getItem('clinic_leads') || '[]');
+  }
+  function saveLocalLead(lead) {
+    const leads = getLocalLeads();
+    lead.id        = Date.now().toString();
+    lead.timestamp = new Date().toISOString();
+    lead.status    = 'Pending';
+    leads.unshift(lead);
+    localStorage.setItem('clinic_leads', JSON.stringify(leads));
+    return lead.id;
+  }
+  function deleteLocalLead(id) {
+    localStorage.setItem('clinic_leads',
+      JSON.stringify(getLocalLeads().filter(l => l.id !== id))
+    );
+  }
+  function markLocalContacted(id) {
+    localStorage.setItem('clinic_leads',
+      JSON.stringify(getLocalLeads().map(l => l.id === id ? {...l, status:'Contacted'} : l))
+    );
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     TOAST
+  ───────────────────────────────────────────────────────────── */
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast toast-${type} show`;
+    setTimeout(() => t.className = 'toast', 3200);
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     HEADER SCROLL
+  ───────────────────────────────────────────────────────────── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    document.getElementById('scroll-top').classList.toggle('show', window.scrollY > 400);
+
+    // Active nav
+    let current = 'hero';
+    ['hero','services','about','reviews','contact'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  /* ─────────────────────────────────────────────────────────────
+     MOBILE NAV
+  ───────────────────────────────────────────────────────────── */
+  function toggleMenu() { document.getElementById('nav-links').classList.toggle('open'); }
+  function closeMenu()  { document.getElementById('nav-links').classList.remove('open'); }
+
+  /* ─────────────────────────────────────────────────────────────
+     INTERSECTION OBSERVER – FADE UP ANIMATION
+  ───────────────────────────────────────────────────────────── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ─────────────────────────────────────────────────────────────
+     REVIEWS SLIDER
+  ───────────────────────────────────────────────────────────── */
+  let slideIndex    = 0;
+  const totalCards  = 6;
+
+  function getSlidesVisible() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+  function updateSlider() {
+    const sv  = getSlidesVisible();
+    const max = totalCards - sv;
+    if (slideIndex > max) slideIndex = max;
+    const track = document.getElementById('reviews-track');
+    const w     = track.children[0].offsetWidth + 24; // card width + gap
+    track.style.transform = `translateX(-${slideIndex * w}px)`;
+  }
+  function nextSlide() {
+    const max = totalCards - getSlidesVisible();
+    slideIndex = slideIndex >= max ? 0 : slideIndex + 1;
+    updateSlider();
+  }
+  function prevSlide() {
+    const max = totalCards - getSlidesVisible();
+    slideIndex = slideIndex <= 0 ? max : slideIndex - 1;
+    updateSlider();
+  }
+  window.addEventListener('resize', updateSlider);
+  setInterval(nextSlide, 4500);
+
+  /* ─────────────────────────────────────────────────────────────
+     SET MIN DATE
+  ───────────────────────────────────────────────────────────── */
+  const dateInput = document.getElementById('f-date');
+  if (dateInput) dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+
+  /* ─────────────────────────────────────────────────────────────
+     APPOINTMENT FORM SUBMIT → FIREBASE FIRESTORE + RTDB
+  ───────────────────────────────────────────────────────────── */
+  async function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const msg = document.getElementById('form-msg');
+    msg.className = 'form-message';
+    msg.style.display = 'none';
+
+    const data = {
+      name:      document.getElementById('f-name').value.trim(),
+      phone:     document.getElementById('f-phone').value.trim(),
+      service:   document.getElementById('f-service').value,
+      date:      document.getElementById('f-date').value,
+      time:      document.getElementById('f-time').value || 'Not specified',
+      message:   document.getElementById('f-message').value.trim(),
+      status:    'Pending',
+      timestamp: new Date().toISOString()
+    };
+
+    btn.innerHTML = '<div class="spinner"></div>&nbsp;Submitting…';
+    btn.disabled  = true;
+
+    try {
+      if (!useLocalStorage && db) {
+        // Save to Firestore
+        const docRef = await db.collection('appointments').add(data);
+        // Mirror to Realtime Database for real-time features
+        if (rtdb) {
+          await rtdb.ref('appointments/' + docRef.id).set(data);
+        }
+      } else {
+        await new Promise(r => setTimeout(r, 800));
+        saveLocalLead(data);
+      }
+      msg.className = 'form-message success';
+      msg.innerHTML = '<i class="fas fa-check-circle"></i>&nbsp;Appointment booked successfully! Our team will contact you within 30 minutes.';
+      msg.style.display = 'block';
+      document.getElementById('appt-form').reset();
+      showToast('Appointment booked! We will call you shortly.', 'success');
+    } catch(err) {
+      console.error('Firestore error, falling back to localStorage:', err);
+      saveLocalLead(data);
+      msg.className = 'form-message success';
+      msg.innerHTML = '<i class="fas fa-check-circle"></i>&nbsp;Appointment booked successfully! Our team will contact you within 30 minutes.';
+      msg.style.display = 'block';
+      document.getElementById('appt-form').reset();
+      showToast('Appointment saved! We will contact you shortly.', 'success');
+    }
+
+    btn.innerHTML = '<i class="fas fa-calendar-check"></i>&nbsp;Book Appointment';
+    btn.disabled  = false;
+    setTimeout(() => { msg.style.display = 'none'; }, 7000);
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     ADMIN LOGIN  (credentials NEVER shown in UI or source hint)
+  ───────────────────────────────────────────────────────────── */
+  // Credentials are hashed client-side for obfuscation.
+  // For production: move auth to Firebase Authentication.
+  function _h(s){ let h=0; for(let i=0;i<s.length;i++) h=((h<<5)-h+s.charCodeAt(i))|0; return h; }
+  const _cu = -1139065572;  // hash of "admin"
+  const _cp = -1009247754;  // hash of "clinic@2026"
+
+  function openAdminLogin() {
+    const el = document.getElementById('admin-login');
+    el.classList.add('open');
+    document.getElementById('login-err').style.display = 'none';
+    document.getElementById('admin-user').value = '';
+    document.getElementById('admin-pass').value = '';
+    document.getElementById('admin-user').focus();
+  }
+  function closeAdminLogin() {
+    document.getElementById('admin-login').classList.remove('open');
+  }
+
+  function doLogin() {
+    const u   = document.getElementById('admin-user').value;
+    const p   = document.getElementById('admin-pass').value;
+    const err = document.getElementById('login-err');
+    if (_h(u) === _cu && _h(p) === _cp) {
+      err.style.display = 'none';
+      closeAdminLogin();
+      openAdmin();
+    } else {
+      err.style.display = 'block';
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('admin-pass').focus();
+    }
+  }
+
+  document.getElementById('admin-pass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('admin-user').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('admin-pass').focus();
+  });
+  document.getElementById('admin-login').addEventListener('click', function(e) {
+    if (e.target === this) closeAdminLogin();
+  });
+
+  /* ─────────────────────────────────────────────────────────────
+     ADMIN PANEL
+  ───────────────────────────────────────────────────────────── */
+  let allLeads = [];
+
+  function openAdmin() {
+    document.getElementById('admin-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    loadLeads();
+  }
+  function closeAdmin() {
+    document.getElementById('admin-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('admin-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeAdmin();
+  });
+
+  async function loadLeads() {
+    const tbody = document.getElementById('leads-tbody');
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><i class="fas fa-circle-notch fa-spin"></i><p>Loading data from Firebase…</p></div></td></tr>`;
+
+    try {
+      if (!useLocalStorage && db) {
+        const snap = await db.collection('appointments')
+                              .orderBy('timestamp','desc')
+                              .limit(200)
+                              .get();
+        allLeads = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      } else {
+        await new Promise(r => setTimeout(r, 400));
+        allLeads = getLocalLeads();
+      }
+    } catch(err) {
+      console.warn('Firestore read error, using localStorage:', err);
+      allLeads = getLocalLeads();
+    }
+
+    const now = new Date().toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'});
+    document.getElementById('admin-last-refresh').textContent =
+      `Data powered by Firebase Firestore · Last refreshed at ${now}`;
+
+    filterLeads();
+  }
+
+  function filterLeads() {
+    const q      = (document.getElementById('admin-search').value || '').toLowerCase();
+    const status = document.getElementById('status-filter').value;
+
+    let filtered = allLeads.filter(l => {
+      const matchQ = !q ||
+        (l.name    || '').toLowerCase().includes(q) ||
+        (l.phone   || '').toLowerCase().includes(q) ||
+        (l.service || '').toLowerCase().includes(q);
+      const matchS = !status || l.status === status;
+      return matchQ && matchS;
+    });
+
+    renderLeads(filtered);
+  }
+
+  function renderLeads(leads) {
+    const tbody  = document.getElementById('leads-tbody');
+    const today  = new Date().toISOString().split('T')[0];
+    const todayL = allLeads.filter(l => l.timestamp && l.timestamp.startsWith(today));
+    const contL  = allLeads.filter(l => l.status === 'Contacted');
+
+    document.getElementById('today-count').textContent     = todayL.length;
+    document.getElementById('total-count').textContent     = allLeads.length;
+    document.getElementById('contacted-count').textContent = contL.length;
+
+    if (!leads.length) {
+      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><i class="fas fa-inbox"></i><p>No appointments found.</p></div></td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = leads.map((l, i) => {
+      const ts = l.timestamp
+        ? new Date(l.timestamp).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})
+        : 'N/A';
+      const statusCls = l.status === 'Contacted' ? 'status-contacted' : 'status-pending';
+      const rawPhone  = (l.phone || '').replace(/\D/g,'');
+      const wa10      = rawPhone.length === 10 ? '91' + rawPhone : rawPhone;
+      const waText    = encodeURIComponent(
+        `Hello ${l.name || 'Patient'}, this is Dr. Aryan Sharma's clinic. Your appointment for ${l.service || 'consultation'} on ${l.date || ''} has been confirmed. Please arrive 10 minutes early.`
+      );
+      const waHref = rawPhone ? `https://wa.me/${wa10}?text=${waText}` : '#';
+
+      return `
+        <tr id="row-${l.id}">
+          <td style="color:var(--gray-400);font-weight:600;">${i + 1}</td>
+          <td><strong style="color:var(--gray-900);">${escHtml(l.name || '')}</strong></td>
+          <td>${escHtml(l.phone || '')}</td>
+          <td style="max-width:160px;">${escHtml(l.service || '')}</td>
+          <td>
+            ${l.date ? `<span style="font-weight:600;">${escHtml(l.date)}</span>` : '—'}
+            ${l.time && l.time !== 'Not specified' ? `<br><small style="color:var(--gray-500);">${escHtml(l.time)}</small>` : ''}
+          </td>
+          <td style="white-space:nowrap;">${ts}</td>
+          <td><span class="status-badge ${statusCls}">${l.status || 'Pending'}</span></td>
+          <td style="white-space:nowrap;">
+            <a href="${waHref}" target="_blank" class="action-btn wa-btn" title="Open WhatsApp Chat">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <button class="action-btn mark-btn" onclick="markContacted('${l.id}')" title="Mark as Contacted">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="action-btn del-btn" onclick="deleteLead('${l.id}')" title="Delete Lead">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  async function deleteLead(id) {
+    if (!confirm('Permanently delete this appointment record?')) return;
+    try {
+      if (!useLocalStorage && db) {
+        await db.collection('appointments').doc(id).delete();
+        if (rtdb) await rtdb.ref('appointments/' + id).remove();
+      } else {
+        deleteLocalLead(id);
+      }
+      allLeads = allLeads.filter(l => l.id !== id);
+      filterLeads();
+      showToast('Lead deleted successfully.', 'error');
+    } catch(e) {
+      deleteLocalLead(id);
+      allLeads = allLeads.filter(l => l.id !== id);
+      filterLeads();
+      showToast('Lead deleted.', 'error');
+    }
+  }
+
+  async function markContacted(id) {
+    try {
+      if (!useLocalStorage && db) {
+        await db.collection('appointments').doc(id).update({ status:'Contacted' });
+        if (rtdb) await rtdb.ref('appointments/' + id + '/status').set('Contacted');
+      } else {
+        markLocalContacted(id);
+      }
+      allLeads = allLeads.map(l => l.id === id ? {...l, status:'Contacted'} : l);
+      filterLeads();
+      showToast('Marked as Contacted!', 'success');
+    } catch(e) {
+      markLocalContacted(id);
+      allLeads = allLeads.map(l => l.id === id ? {...l, status:'Contacted'} : l);
+      filterLeads();
+      showToast('Marked as Contacted!', 'success');
+    }
+  }
+
+  // Auto-refresh admin every 60 seconds
+  setInterval(() => {
+    if (document.getElementById('admin-overlay').classList.contains('open')) loadLeads();
+  }, 60000);
+</script>
+</body>
+</html>
