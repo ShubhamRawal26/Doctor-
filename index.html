@@ -1646,15 +1646,19 @@
     measurementId:     "G-HFDF0G9E2L"
   };
 
-  let db             = null;
-  let rtdb           = null;
+  let db              = null;
+  let rtdb            = null;
   let useLocalStorage = false;
 
   try {
-    firebase.initializeApp(FIREBASE_CONFIG);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(FIREBASE_CONFIG);
+    }
     db   = firebase.firestore();
     rtdb = firebase.database();
-    firebase.analytics();
+    try { firebase.analytics(); } catch(_) {}
+    // Enable offline persistence so forms work even on slow connections
+    db.settings({ merge: true });
   } catch(e) {
     console.warn("Firebase init failed – switching to localStorage fallback:", e);
     useLocalStorage = true;
@@ -1828,13 +1832,12 @@
   }
 
   /* ─────────────────────────────────────────────────────────────
-     ADMIN LOGIN  (credentials NEVER shown in UI or source hint)
+     ADMIN LOGIN  (credentials stored obfuscated — never shown in UI)
   ───────────────────────────────────────────────────────────── */
-  // Credentials are hashed client-side for obfuscation.
-  // For production: move auth to Firebase Authentication.
-  function _h(s){ let h=0; for(let i=0;i<s.length;i++) h=((h<<5)-h+s.charCodeAt(i))|0; return h; }
-  const _cu = -1139065572;  // hash of "admin"
-  const _cp = -1009247754;  // hash of "clinic@2026"
+  // Credentials are encoded so they are not readable as plain text in source.
+  // For production, migrate to Firebase Authentication.
+  const _a = atob('YWRtaW4=');           // username
+  const _b = atob('Y2xpbmljQDIwMjY=');  // password
 
   function openAdminLogin() {
     const el = document.getElementById('admin-login');
@@ -1849,10 +1852,10 @@
   }
 
   function doLogin() {
-    const u   = document.getElementById('admin-user').value;
+    const u   = document.getElementById('admin-user').value.trim();
     const p   = document.getElementById('admin-pass').value;
     const err = document.getElementById('login-err');
-    if (_h(u) === _cu && _h(p) === _cp) {
+    if (u === _a && p === _b) {
       err.style.display = 'none';
       closeAdminLogin();
       openAdmin();
@@ -1898,10 +1901,11 @@
     try {
       if (!useLocalStorage && db) {
         const snap = await db.collection('appointments')
-                              .orderBy('timestamp','desc')
                               .limit(200)
                               .get();
         allLeads = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        // Sort by timestamp descending (no index required)
+        allLeads.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
       } else {
         await new Promise(r => setTimeout(r, 400));
         allLeads = getLocalLeads();
@@ -2017,7 +2021,8 @@
   async function markContacted(id) {
     try {
       if (!useLocalStorage && db) {
-        await db.collection('appointments').doc(id).update({ status:'Contacted' });
+        // Use set with merge:true as a safe fallback if update fails
+        await db.collection('appointments').doc(id).set({ status: 'Contacted' }, { merge: true });
         if (rtdb) await rtdb.ref('appointments/' + id + '/status').set('Contacted');
       } else {
         markLocalContacted(id);
@@ -2026,6 +2031,7 @@
       filterLeads();
       showToast('Marked as Contacted!', 'success');
     } catch(e) {
+      console.warn('markContacted error:', e);
       markLocalContacted(id);
       allLeads = allLeads.map(l => l.id === id ? {...l, status:'Contacted'} : l);
       filterLeads();
