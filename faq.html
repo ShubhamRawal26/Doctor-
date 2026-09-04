@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-4H7v-2h4V7h2v4h4v2h-4v4z'/%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequently Asked Questions — SalvaMedic Innovation Clinic</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            darkNavy: '#0b152d',
+          },
+          boxShadow: {
+            '2xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+            'glass': '0 8px 32px 0 rgba(11, 21, 45, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-[#f8fafc] text-[#0b152d] antialiased flex flex-col min-h-screen selection:bg-blue-600 selection:text-white">
+
+  <!-- ============================================================
+       HEADER & NAVIGATION BAR
+  ============================================================ -->
+  <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
+          <i data-lucide="stethoscope" class="w-5 h-5"></i>
+        </div>
+        <span class="text-xl font-extrabold tracking-tight text-[#0b152d] flex items-center">
+          Salva<span class="text-blue-600">Medic</span>
+        </span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+        <a href="specialties.html" class="hover:text-blue-600 transition-colors">Specialties</a>
+        <a href="doctors.html" class="hover:text-blue-600 transition-colors">Doctors</a>
+        <a href="facilities.html" class="hover:text-blue-600 transition-colors">Inside Clinic</a>
+        <a href="about.html" class="hover:text-blue-600 transition-colors">Why Patients Trust Us</a>
+        <a href="reviews.html" class="hover:text-blue-600 transition-colors">Patient Stories</a>
+        <a href="faq.html" class="text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5">FAQ</a>
+        <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button 
+          onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
+          class="btn-primary text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md shadow-blue-600/20 flex items-center gap-2 cursor-pointer"
+        >
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+          <span>Schedule Appointment</span>
+        </button>
+
+        <button 
+          id="mobileMenuBtn"
+          onclick="toggleMobileMenu()"
+          class="lg:hidden w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200"
+          aria-label="Toggle menu"
+        >
+          <i data-lucide="menu" id="menuIcon" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-slate-200 p-5 space-y-3">
+      <a href="index.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Home <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="specialties.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Specialties <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="doctors.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Find a Doctor <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="facilities.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Inside Clinic <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="about.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Why Patients Trust Us <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="reviews.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Patient Stories <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="faq.html" class="flex items-center justify-between p-2.5 rounded-xl bg-blue-50 font-bold text-blue-600 text-sm">
+        FAQ <i data-lucide="chevron-right" class="w-4 h-4 text-blue-600"></i>
+      </a>
+      <a href="contact.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Contact &amp; Concierge <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <div class="pt-3 border-t border-slate-100">
+        <button 
+          onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
+          class="w-full btn-primary text-white font-bold py-3 rounded-xl text-sm flex items-center justify-center gap-2"
+        >
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Book Appointment</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO BANNER
+  ============================================================ -->
+  <section class="relative bg-gradient-to-b from-blue-50/60 via-slate-50 to-white py-16 sm:py-20 border-b border-slate-200/80">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-xs font-bold uppercase tracking-wider mb-4">
+        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+        <span>Patient Knowledge Base</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-[#0b152d] tracking-tight leading-tight">
+        Frequently Asked <span class="text-blue-600">Questions</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 mt-4 leading-relaxed">
+        Everything you need to know about our guaranteed 8-minute appointments, insurance coverage, 3T MRI diagnostics, and remote telehealth consultations.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-slate-500">
+        <span class="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i> 100% Transparent Pricing
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-blue-500"></i> In-Network with 42+ Insurers
+        </span>
+        <span class="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-2xs">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500"></i> 24/7 Concierge Support
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CATEGORIZED FAQ ACCORDION SECTION
+  ============================================================ -->
+  <main class="flex-1 py-14 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+      <!-- Category 1: Appointments & Arrival -->
+      <div>
+        <div class="flex items-center gap-2.5 mb-6">
+          <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+          </div>
+          <h2 class="text-xl font-extrabold text-[#0b152d]">Appointments, Wait Times &amp; Intake</h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- FAQ Item 1 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-1')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">How does the 8-minute waiting room guarantee work?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-1" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-1" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              When you arrive for your scheduled appointment and complete digital QR check-in, our RFID clinic system tracks your status in real time. We guarantee you will be seated in an exam room with your attending physician or care team in under 8 minutes. In the rare event of a medical emergency causing a delay past 15 minutes, your consultation fee is discounted by 50% automatically.
+            </div>
+          </div>
+
+          <!-- FAQ Item 2 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-2')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">Can I book same-day appointments for urgent symptoms?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-2" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-2" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              Yes. We maintain reserved acute-care slots in cardiology, pediatrics, internal medicine, and urgent family health every single morning and afternoon. You can select "Same-Day Urgent" during online booking or call our concierge desk for priority triage.
+            </div>
+          </div>
+
+          <!-- FAQ Item 3 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-3')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">What documents do I need to bring for my first consultation?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-3" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-3" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              Please bring a valid photo ID (passport, national identity card, or driver’s license), your current insurance card or international coverage policy, and a list of any daily prescription medications or prior surgical records if available. You can also securely upload records through our patient portal prior to arrival.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category 2: Insurance & Billing -->
+      <div>
+        <div class="flex items-center gap-2.5 mb-6">
+          <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+            <i data-lucide="credit-card" class="w-4 h-4"></i>
+          </div>
+          <h2 class="text-xl font-extrabold text-[#0b152d]">Insurance, Pricing &amp; Payments</h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- FAQ Item 4 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-4')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">Which health insurance providers does SalvaMedic accept?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-4" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-4" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              We partner directly with over 42 leading domestic and European international health insurance carriers, including Allianz Worldwide Care, Cigna Global, Bupa Global, PZU Zdrowie, AXA Assistance, and Aetna International. For self-pay patients, we provide 100% itemized upfront invoices with no hidden facility surcharges.
+            </div>
+          </div>
+
+          <!-- FAQ Item 5 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-5')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">Do you offer cashless direct-billing for international patients?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-5" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-5" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              Yes. Our International Patient Concierge Desk handles pre-authorization and Guarantee of Payment (GOP) verification directly with your insurer. In most instances, your eligible outpatient care, laboratory panels, and diagnostic imaging are settled directly without out-of-pocket expenses.
+            </div>
+          </div>
+
+          <!-- FAQ Item 6 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-6')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">What payment methods are accepted at the clinic desk?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-6" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-6" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              We accept Visa, Mastercard, Apple Pay, Google Pay, contactless EMV cards, direct bank wire transfer for specialized surgical programs, and local cash payment at our reception desk.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category 3: Diagnostic Imaging & Labs -->
+      <div>
+        <div class="flex items-center gap-2.5 mb-6">
+          <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+            <i data-lucide="scan" class="w-4 h-4"></i>
+          </div>
+          <h2 class="text-xl font-extrabold text-[#0b152d]">Diagnostics, 3T MRI &amp; Laboratory</h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- FAQ Item 7 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-7')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">How quickly will I receive my 3T MRI or blood panel results?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-7" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-7" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              Our automated Roche Cobas clinical chemistry analyzer delivers standard blood panel and metabolic results in just 45 to 60 minutes. 3T MRI scans are interpreted by dual board-certified radiologists with high-definition DICOM access delivered to your phone portal within 4 hours.
+            </div>
+          </div>
+
+          <!-- FAQ Item 8 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-8')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">Do I need a doctor's referral to schedule an MRI or Ultrasound?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-8" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-8" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              While a clinical referral is helpful, you may also book directly through our preventative screening programs. Prior to the scan, our on-site radiologist conducts a 10-minute safety intake to verify contrast suitability and absence of metallic implants.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category 4: Telehealth & Prescriptions -->
+      <div>
+        <div class="flex items-center gap-2.5 mb-6">
+          <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+            <i data-lucide="video" class="w-4 h-4"></i>
+          </div>
+          <h2 class="text-xl font-extrabold text-[#0b152d]">Telehealth &amp; Digital Prescriptions</h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- FAQ Item 9 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-9')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">How do I connect to a 24/7 virtual video consultation?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-9" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-9" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              After booking a Virtual Telehealth slot, you receive an encrypted, one-click web link via SMS and email. No app download is required — the video room runs securely in any mobile or desktop web browser with end-to-end 256-bit encryption.
+            </div>
+          </div>
+
+          <!-- FAQ Item 10 -->
+          <div class="bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all duration-200">
+            <button onclick="toggleFAQ('faq-10')" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
+              <span class="text-base sm:text-lg">Can physicians issue official pharmacy prescriptions during telehealth?</span>
+              <i data-lucide="chevron-down" id="faq-icon-faq-10" class="w-5 h-5 text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faq-answer-faq-10" class="hidden px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 bg-slate-50/50">
+              Yes. Licensed attending physicians can generate electronically signed e-prescriptions with a verified QR code, accepted by all licensed partner pharmacies nationwide.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Help Callout Box -->
+      <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 sm:p-10 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center sm:text-left">
+          <h3 class="text-xl sm:text-2xl font-black tracking-tight">Have a question not listed here?</h3>
+          <p class="text-blue-100 text-sm max-w-md">
+            Our medical concierge team is ready to answer questions regarding specialty care, treatment plans, or travel assistance.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <a href="contact.html" class="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-full font-bold text-sm text-center shadow-md transition-colors">
+            Contact Concierge Desk
+          </a>
+          <button onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')" class="bg-blue-800 hover:bg-blue-900 border border-blue-400/40 text-white px-6 py-3 rounded-full font-bold text-sm text-center transition-colors cursor-pointer">
+            Book an Exam
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="bg-white border-t border-slate-200 mt-auto">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs">
+              <i data-lucide="stethoscope" class="w-4 h-4"></i>
+            </div>
+            <span class="text-xl font-extrabold tracking-tight text-[#0b152d]">
+              Salva<span class="text-blue-600">Medic</span>
+            </span>
+          </div>
+          <p class="text-sm text-slate-500 max-w-sm leading-relaxed">
+            Multi-specialty clinical excellence powered by evidence-based medicine, digital diagnostics, and an 8-minute door-to-doctor guarantee.
+          </p>
+          <div class="pt-2 flex items-center gap-3 text-slate-400">
+            <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </span>
+            <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </span>
+            <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors">
+              <i data-lucide="linkedin" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#0b152d] mb-4">Navigation</h4>
+          <ul class="space-y-2.5 text-sm text-slate-600">
+            <li><a href="index.html" class="hover:text-blue-600 transition-colors">Home</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Specialties</a></li>
+            <li><a href="doctors.html" class="hover:text-blue-600 transition-colors">Find a Doctor</a></li>
+            <li><a href="facilities.html" class="hover:text-blue-600 transition-colors">Inside Clinic</a></li>
+            <li><a href="about.html" class="hover:text-blue-600 transition-colors">Why Patients Trust Us</a></li>
+            <li><a href="reviews.html" class="hover:text-blue-600 transition-colors">Patient Stories</a></li>
+            <li><a href="faq.html" class="text-blue-600 font-bold">FAQ</a></li>
+            <li><a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#0b152d] mb-4">Key Specialties</h4>
+          <ul class="space-y-2.5 text-sm text-slate-600">
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Primary &amp; Family Care</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Cardiology &amp; Heart Health</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Pediatrics &amp; Child Health</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Women's Health &amp; Maternity</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">3T MRI &amp; Ultrasound Diagnostics</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Telehealth Remote Consults</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#0b152d] mb-4">Clinic Hours &amp; Desk</h4>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="font-semibold text-slate-800">Monday &ndash; Friday:</li>
+            <li class="text-slate-500">08:00 AM &ndash; 08:30 PM</li>
+            <li class="font-semibold text-slate-800 pt-1">Saturday:</li>
+            <li class="text-slate-500">09:00 AM &ndash; 06:00 PM</li>
+            <li class="font-semibold text-slate-800 pt-1">Sunday (Urgent Care):</li>
+            <li class="text-slate-500">10:00 AM &ndash; 04:00 PM</li>
+          </ul>
+          <div class="mt-4 pt-4 border-t border-slate-100">
+            <div class="text-xs font-bold text-slate-900">Concierge Desk:</div>
+            <a href="tel:+18007258263" class="text-sm font-extrabold text-blue-600 hover:underline">+1 (800) 725-8263</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Built by NexGen Digital Badge and Copyright -->
+      <div class="mt-12 pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+        <a 
+          href="https://nexgendigital.tech" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="group flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200/80 transition-all duration-200"
+        >
+          <div class="w-8 h-8 rounded-xl bg-[#0b152d] group-hover:bg-blue-600 text-white flex items-center justify-center font-black text-xs transition-colors shadow-2xs">
+            NX
+          </div>
+          <div class="text-left">
+            <span class="block text-[10px] uppercase font-bold tracking-wider text-slate-400">Architected &amp; Engineered By</span>
+            <span class="text-xs font-extrabold text-[#0b152d] group-hover:text-blue-600 transition-colors flex items-center gap-1">
+              NexGen Digital <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+        </a>
+
+        <div class="flex items-center gap-6 text-xs font-semibold text-slate-500">
+          <a href="about.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+          <a href="about.html" class="hover:text-blue-600 transition-colors">Terms of Care</a>
+          <a href="about.html" class="hover:text-blue-600 transition-colors">HIPAA Compliance</a>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-center sm:text-left">
+          <span class="font-semibold text-slate-600">&copy; 2026 NexGen Digital. All Rights Reserved.</span>
+          <span class="hidden sm:inline">&bull;</span>
+          <span>Crafted for simplicity and performance.</span>
+          <span class="hidden sm:inline">&bull;</span>
+          <a href="https://nexgendigital.tech" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">
+            nexgendigital.tech
+          </a>
+        </div>
+
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1.5 hover:text-blue-600 font-bold transition-colors cursor-pointer">
+          <span>Back to Top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md">
+    <div class="relative w-full max-w-xl bg-white rounded-[32px] shadow-2xl border border-slate-200/80 overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between p-6 sm:px-8 border-b border-slate-100 bg-gradient-to-r from-blue-50/50 via-white to-white">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
+            <i data-lucide="stethoscope" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-[#0a1024] tracking-tight">Schedule Consultation</h3>
+            <p class="text-xs text-slate-500 font-medium">SalvaMedic Innovation Clinic &bull; Rapid 30-min confirmation</p>
+          </div>
+        </div>
+        <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div id="bookingFormContainer" class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1">
+        <form onsubmit="handleBookingSubmit(event)" class="space-y-5">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Select Medical Department</label>
+            <select id="modalServiceInput" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+              <option value="Primary & Family Care">Primary &amp; Family Care</option>
+              <option value="Cardiology & Heart Center">Cardiology &amp; Heart Center (ECG / Ultrasound)</option>
+              <option value="Pediatrics & Infant Care">Pediatrics &amp; Infant Care</option>
+              <option value="Women’s Health & Longevity">Women’s Health &amp; Longevity</option>
+              <option value="3T High-Field MRI & Lab">3T High-Field MRI &amp; Diagnostics</option>
+              <option value="Virtual Telehealth Consult">24/7 Virtual Telehealth Video Consult</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">2. Attending Physician</label>
+            <input id="modalDoctorInput" type="text" readonly class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-700 cursor-not-allowed">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">3. Preferred Date</label>
+              <input id="modalDateInput" type="date" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">4. Time Window</label>
+              <select id="modalTimeInput" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+                <option value="Morning (09:00 AM – 12:00 PM)">Morning (09:00 AM – 12:00 PM)</option>
+                <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon (12:00 PM – 04:00 PM)</option>
+                <option value="Evening (04:00 PM – 08:00 PM)">Evening (04:00 PM – 08:00 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">5. Patient Full Name</label>
+              <input id="modalNameInput" type="text" required placeholder="e.g. John Doe" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">6. Mobile / WhatsApp Phone</label>
+              <input id="modalPhoneInput" type="tel" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">7. Symptoms or Medical Objective (Optional)</label>
+            <textarea id="modalNotesInput" rows="2" placeholder="Briefly describe what symptoms you are experiencing or what tests you require..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"></textarea>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full btn-primary text-white py-4 rounded-2xl font-extrabold text-sm sm:text-base shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+              <span>Confirm &amp; Reserve Appointment</span>
+            </button>
+            <p class="text-center text-[11px] text-slate-400 mt-2">Zero commitment &bull; Free cancellation up to 2 hours before</p>
+          </div>
+
+        </form>
+      </div>
+
+      <div id="bookingSuccessContainer" class="hidden p-8 text-center space-y-5">
+        <div class="w-16 h-16 rounded-3xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-md">
+          <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+        </div>
+        <div>
+          <h3 class="text-2xl font-extrabold text-[#0b152d]">Consultation Reserved!</h3>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-2">
+            We have received your appointment request. Our clinical concierge will send a confirmation SMS/call to your number within 15 minutes.
+          </p>
+        </div>
+        <div id="bookingSummaryDetails" class="bg-slate-50 rounded-2xl p-4 text-xs text-left text-slate-700 space-y-1.5 border border-slate-200">
+        </div>
+        <button onclick="closeBookingModal()" class="w-full btn-primary text-white py-3 rounded-xl font-bold text-sm cursor-pointer">
+          Done &bull; Return to Overview
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>

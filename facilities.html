@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-4H7v-2h4V7h2v4h4v2h-4v4z'/%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inside SalvaMedic — 4K Medical Facility &amp; Diagnostics Tour</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            darkNavy: '#0b152d',
+          },
+          boxShadow: {
+            '2xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+            'glass': '0 8px 32px 0 rgba(11, 21, 45, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-[#f8fafc] text-[#0b152d] antialiased flex flex-col min-h-screen selection:bg-blue-600 selection:text-white">
+
+  <!-- ============================================================
+       HEADER & NAVIGATION BAR
+  ============================================================ -->
+  <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
+          <i data-lucide="stethoscope" class="w-5 h-5"></i>
+        </div>
+        <span class="text-xl font-extrabold tracking-tight text-[#0b152d] flex items-center">
+          Salva<span class="text-blue-600">Medic</span>
+        </span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+        <a href="specialties.html" class="hover:text-blue-600 transition-colors">Specialties</a>
+        <a href="doctors.html" class="hover:text-blue-600 transition-colors">Doctors</a>
+        <a href="facilities.html" class="text-blue-600 font-bold border-b-2 border-blue-600 pb-0.5">Inside Clinic</a>
+        <a href="about.html" class="hover:text-blue-600 transition-colors">Why Patients Trust Us</a>
+        <a href="reviews.html" class="hover:text-blue-600 transition-colors">Patient Stories</a>
+        <a href="faq.html" class="hover:text-blue-600 transition-colors">FAQ</a>
+        <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button 
+          onclick="openBookingModal('Facility Tour & Consult', 'Dr. Maria Kovalenko, MD')"
+          class="btn-primary text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md shadow-blue-600/20 flex items-center gap-2 cursor-pointer"
+        >
+          <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+          <span>Schedule Appointment</span>
+        </button>
+
+        <button 
+          id="mobileMenuBtn"
+          onclick="toggleMobileMenu()"
+          class="lg:hidden w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200"
+          aria-label="Toggle menu"
+        >
+          <i data-lucide="menu" id="menuIcon" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-slate-200 p-5 space-y-3">
+      <a href="index.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Home <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="specialties.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Specialties <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="doctors.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Find a Doctor <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="facilities.html" class="flex items-center justify-between p-2.5 rounded-xl bg-blue-50 font-bold text-blue-600 text-sm">
+        Inside Clinic <i data-lucide="chevron-right" class="w-4 h-4 text-blue-600"></i>
+      </a>
+      <a href="about.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Why Patients Trust Us <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="reviews.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Patient Stories <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="faq.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        FAQ <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+      <a href="contact.html" class="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 font-semibold text-slate-800 text-sm">
+        Contact &amp; Visit <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      </a>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col">
+
+    <!-- Page Header Banner -->
+    <section class="w-full bg-gradient-to-b from-blue-50/60 to-transparent py-12 sm:py-16 border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+        <div class="inline-flex items-center gap-1.5 bg-blue-100/80 text-blue-700 px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider mb-4">
+          <i data-lucide="camera" class="w-4 h-4"></i>
+          <span>Virtual 4K Tour</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0b152d]">
+          Inside Our Medical Facility
+        </h1>
+        <p class="text-sm sm:text-base text-slate-600 mt-3.5 leading-relaxed">
+          Engineered for acoustic silence, clinical sterility, and total patient comfort. Click any space to launch the full-resolution 4K viewer.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="flex items-center justify-center gap-2 bg-slate-100 p-1.5 rounded-full border border-slate-200 mt-8 mx-auto w-fit flex-wrap">
+          <button onclick="filterFacilities('all', this)" class="facility-filter-btn px-5 py-2 rounded-full text-xs font-bold bg-blue-600 text-white shadow-2xs transition-all cursor-pointer">All Spaces</button>
+          <button onclick="filterFacilities('diagnostics', this)" class="facility-filter-btn px-5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all cursor-pointer">Diagnostics</button>
+          <button onclick="filterFacilities('surgical', this)" class="facility-filter-btn px-5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all cursor-pointer">Surgical Suites</button>
+          <button onclick="filterFacilities('suites', this)" class="facility-filter-btn px-5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all cursor-pointer">Private Suites</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 4K Facility Cards Grid -->
+    <section class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 sm:py-16">
+      <div id="facilityGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Space 1: Lobby -->
+        <div data-category="suites" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/lobby-4k.jpg', 'Executive Reception & Patient Lounge', 'Main Entrance')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/lobby-4k.jpg" alt="Executive Reception" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Main Entrance</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">Executive Reception &amp; Lounge</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Quiet, acoustically optimized waiting lounge designed for calm, zero-stress check-in.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 2: MRI -->
+        <div data-category="diagnostics" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/mri-4k.jpg', 'AI 3T Magnetic Resonance Imaging (MRI)', 'Radiology Center')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/mri-4k.jpg" alt="3T MRI Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Radiology Center</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">AI 3T Magnetic Resonance Imaging</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Ultra-clear cross-sectional diagnostic imaging with wide-bore patient comfort design.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 3: Operating Room -->
+        <div data-category="surgical" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/operating-4k.jpg', 'Ultra-Clean Robotic Surgical Suite', 'Operating Wing')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/operating-4k.jpg" alt="Surgical Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Operating Wing</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">Robotic Surgical Theatre</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Laminar positive-pressure operating room engineered for minimally invasive procedures.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 4: Lab -->
+        <div data-category="diagnostics" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/lab-4k.jpg', 'Automated Digital Hematology & Blood Lab', 'Biochemistry Lab')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/lab-4k.jpg" alt="Hematology Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Biochemistry Lab</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">Digital Hematology Lab</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Robotic diagnostic testing pipelines delivering accurate blood and hormone panels in 60 mins.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 5: Inpatient Room -->
+        <div data-category="suites" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/inpatient-4k.jpg', 'Private Inpatient Recovery Room', 'Post-Care Wing')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/inpatient-4k.jpg" alt="Inpatient Room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Post-Care Wing</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">Private Recovery Suite</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Comfortable private recovery suites equipped with 24/7 telemetry monitoring.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 6: Pediatrics -->
+        <div data-category="suites" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/pediatric-4k.jpg', 'Pediatric Development & Play Room', 'Child Care')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/pediatric-4k.jpg" alt="Pediatric Room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Child Care</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">Pediatric Play &amp; Exam Suite</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Warm, cheerful environment created to eliminate white-coat fear for children.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 7: Consultation Office -->
+        <div data-category="suites" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/consultation-4k.jpg', 'Physician Consultation & Exam Office', 'Doctor Suites')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/consultation-4k.jpg" alt="Doctor Consultation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Doctor Suites</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">Doctor Exam &amp; Consult Suite</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Confidential discussion room for comprehensive diagnostic evaluation and health mapping.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Space 8: Ultrasound -->
+        <div data-category="diagnostics" class="facility-card bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-2xs spring-hover flex flex-col group cursor-pointer" onclick="openLightbox('assets/images/mri-4k.jpg', 'Digital High-Definition Ultrasound Suite', 'Sonography Center')">
+          <div class="relative h-56 w-full overflow-hidden bg-slate-100">
+            <img src="assets/images/mri-4k.jpg" alt="Sonography Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors"></div>
+            <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-800 shadow-xs">Sonography Center</span>
+            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-white/90 text-slate-800 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base text-[#0b152d] group-hover:text-blue-600 transition-colors">High-Definition Sonography</h3>
+              <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">High-definition soundwave imaging for prenatal, thyroid, abdominal, and vascular evaluation.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       EXECUTIVE FOOTER (NEXGEN CREATOR ATTRIBUTION INCLUDED)
+  ============================================================ -->
+  <footer id="contact" class="w-full bg-white border-t border-slate-200/90 mt-12 pt-14 pb-10">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-200/80 mb-12">
+        <div class="flex items-center gap-3">
+          <i data-lucide="shield-check" class="w-5 h-5 text-blue-600 shrink-0"></i>
+          <div>
+            <div class="text-xs font-bold text-[#0b152d]">HIPAA Certified</div>
+            <div class="text-[10px] text-slate-500">256-Bit Data Encryption</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="award" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+          <div>
+            <div class="text-xs font-bold text-[#0b152d]">CLIA Certified Lab</div>
+            <div class="text-[10px] text-slate-500">Federal Clinical Standard</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="shield-check" class="w-5 h-5 text-purple-600 shrink-0"></i>
+          <div>
+            <div class="text-xs font-bold text-[#0b152d]">FDA Cleared Suite</div>
+            <div class="text-[10px] text-slate-500">Diagnostic Precision</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="award" class="w-5 h-5 text-amber-600 shrink-0"></i>
+          <div>
+            <div class="text-xs font-bold text-[#0b152d]">Top Rated 2026</div>
+            <div class="text-[10px] text-slate-500">4.98/5 Patient Trust</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-100">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs">
+              <i data-lucide="stethoscope" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xl font-extrabold tracking-tight text-[#0b152d] flex items-center">
+              Salva<span class="text-blue-600">Medic</span>
+            </span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-500 max-w-sm leading-relaxed">
+            World-class healthcare, comprehensive diagnostics, and dedicated board-certified physicians &mdash; delivering zero-wait care nationwide.
+          </p>
+
+          <div>
+            <a 
+              href="https://nexgendigital.tech" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-3 p-2.5 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-2xl transition-all group"
+              title="Built by NexGen Digital"
+            >
+              <img 
+                src="https://res.cloudinary.com/sahbncq8/image/upload/v1786081222/NexG1en_alefcv.png" 
+                alt="NexGen Digital Logo" 
+                class="h-7 w-auto object-contain group-hover:scale-105 transition-transform" 
+              />
+              <div class="text-left">
+                <div class="text-[10px] text-slate-400 font-medium">Digital Product Architecture</div>
+                <div class="text-xs font-bold text-slate-800 flex items-center gap-1 group-hover:text-blue-600 transition-colors">
+                  <span>Built by NexGen Digital</span>
+                  <i data-lucide="zap" class="w-3 h-3 text-[#FF6B00] fill-[#FF6B00]"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-[#0b152d] mb-4">Specialties</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-500">
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Primary &amp; Family Care</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Cardiology &amp; 12-Lead ECG</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Pediatrics &amp; Vaccine</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">Women’s Health</a></li>
+            <li><a href="specialties.html" class="hover:text-blue-600 transition-colors">3T MRI &amp; Ultrasound</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-[#0b152d] mb-4">Patient Care</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-500">
+            <li><a href="doctors.html" class="hover:text-blue-600 transition-colors">Find a Doctor</a></li>
+            <li><a href="facilities.html" class="hover:text-blue-600 transition-colors">Facility Tour</a></li>
+            <li><a href="about.html" class="hover:text-blue-600 transition-colors">Why Choose Us</a></li>
+            <li><a href="reviews.html" class="hover:text-blue-600 transition-colors">Patient Reviews</a></li>
+            <li><a href="faq.html" class="hover:text-blue-600 transition-colors">Frequently Asked Questions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-[#0b152d] mb-4">Concierge Desk</h4>
+          <ul class="space-y-3 text-xs sm:text-sm text-slate-600">
+            <li class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
+              <span>Medychnyi Avenue, 8-A, Lviv &bull; Partner Network</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-blue-600 shrink-0"></i>
+              <a href="tel:+18007258263" class="hover:text-blue-600 font-bold">+1 (800) 725-8263</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-blue-600 shrink-0"></i>
+              <a href="mailto:care@salvamedic.com" class="hover:text-blue-600">care@salvamedic.com</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-center sm:text-left">
+          <span class="font-semibold text-slate-600">&copy; 2026 NexGen Digital. All Rights Reserved.</span>
+          <span class="hidden sm:inline">&bull;</span>
+          <span>Crafted for simplicity and performance.</span>
+          <span class="hidden sm:inline">&bull;</span>
+          <a href="https://nexgendigital.tech" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">
+            nexgendigital.tech
+          </a>
+        </div>
+
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1.5 hover:text-blue-600 font-bold transition-colors cursor-pointer">
+          <span>Back to Top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md" onclick="closeLightbox()">
+    <div class="relative max-w-4xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl" onclick="event.stopPropagation()">
+      <div class="relative max-h-[75vh] flex items-center justify-center bg-black">
+        <img id="lightboxImg" src="" alt="4K Facility" class="max-h-[75vh] w-auto object-contain">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 text-white hover:bg-white/40 flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-5 flex items-center justify-between bg-slate-900 text-white">
+        <div>
+          <span id="lightboxDept" class="text-[10px] uppercase tracking-wider text-blue-400 font-extrabold"></span>
+          <h4 id="lightboxTitle" class="text-base font-bold text-white"></h4>
+        </div>
+        <button onclick="closeLightbox(); openBookingModal('Facility Tour & Consult', 'Dr. Maria Kovalenko, MD')" class="btn-primary text-white text-xs font-bold px-4 py-2 rounded-full cursor-pointer">
+          Book Visit in This Suite
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md">
+    <div class="relative w-full max-w-xl bg-white rounded-[32px] shadow-2xl border border-slate-200/80 overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between p-6 sm:px-8 border-b border-slate-100 bg-gradient-to-r from-blue-50/50 via-white to-white">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
+            <i data-lucide="stethoscope" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-[#0a1024] tracking-tight">Schedule Consultation</h3>
+            <p class="text-xs text-slate-500 font-medium">SalvaMedic Innovation Clinic &bull; Rapid 30-min confirmation</p>
+          </div>
+        </div>
+        <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition-colors cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div id="bookingFormContainer" class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1">
+        <form onsubmit="handleBookingSubmit(event)" class="space-y-5">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Select Medical Department</label>
+            <select id="modalServiceInput" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+              <option value="Primary & Family Care">Primary &amp; Family Care</option>
+              <option value="Cardiology & Heart Center">Cardiology &amp; Heart Center (ECG / Ultrasound)</option>
+              <option value="Pediatrics & Infant Care">Pediatrics &amp; Infant Care</option>
+              <option value="Women’s Health & Longevity">Women’s Health &amp; Longevity</option>
+              <option value="3T High-Field MRI & Lab">3T High-Field MRI &amp; Diagnostics</option>
+              <option value="Virtual Telehealth Consult">24/7 Virtual Telehealth Video Consult</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">2. Choose Attending Physician</label>
+            <select id="modalDoctorInput" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+              <option value="Dr. Maria Kovalenko, MD">Dr. Maria Kovalenko, MD (Lead Attending &bull; Internal Medicine)</option>
+              <option value="Dr. Alexander Chen, MD">Dr. Alexander Chen, MD (Chief of Cardiology)</option>
+              <option value="Dr. Sarah Jensen, MD">Dr. Sarah Jensen, MD (Head of Pediatrics)</option>
+              <option value="Dr. Viktor Novak, MD, PhD">Dr. Viktor Novak, MD, PhD (Director of Radiology)</option>
+              <option value="Next Available Board Physician">Next Available Board Physician (Fastest Slot)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">3. Preferred Date</label>
+              <input id="modalDateInput" type="date" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">4. Preferred Time Window</label>
+              <select id="modalTimeInput" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+                <option value="Morning (09:00 AM – 12:00 PM)">Morning (09:00 AM – 12:00 PM)</option>
+                <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon (12:00 PM – 04:00 PM)</option>
+                <option value="Evening (04:00 PM – 08:00 PM)">Evening (04:00 PM – 08:00 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">5. Patient Full Name</label>
+              <input id="modalNameInput" type="text" required placeholder="e.g. John Doe" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">6. Mobile / WhatsApp Phone</label>
+              <input id="modalPhoneInput" type="tel" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">7. Symptoms or Medical Objective (Optional)</label>
+            <textarea id="modalNotesInput" rows="2" placeholder="Briefly describe what symptoms you are experiencing or what tests you require..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"></textarea>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full btn-primary text-white py-4 rounded-2xl font-extrabold text-sm sm:text-base shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+              <span>Confirm &amp; Reserve Appointment</span>
+            </button>
+            <p class="text-center text-[11px] text-slate-400 mt-2">Zero commitment &bull; Free cancellation up to 2 hours before</p>
+          </div>
+
+        </form>
+      </div>
+
+      <div id="bookingSuccessContainer" class="hidden p-8 text-center space-y-5">
+        <div class="w-16 h-16 rounded-3xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto shadow-md">
+          <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+        </div>
+        <div>
+          <h3 class="text-2xl font-extrabold text-[#0b152d]">Consultation Reserved!</h3>
+          <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-2">
+            We have received your appointment request. Our clinical concierge will send a confirmation SMS/call to your number within 15 minutes.
+          </p>
+        </div>
+        <div id="bookingSummaryDetails" class="bg-slate-50 rounded-2xl p-4 text-xs text-left text-slate-700 space-y-1.5 border border-slate-200">
+        </div>
+        <button onclick="closeBookingModal()" class="w-full btn-primary text-white py-3 rounded-xl font-bold text-sm cursor-pointer">
+          Done &bull; Return to Overview
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>
