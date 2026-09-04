@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stethoscope, Phone, CalendarPlus, Menu, X, ChevronRight, ShieldCheck } from 'lucide-react';
+import { Stethoscope, CalendarPlus, Menu, X, ChevronRight } from 'lucide-react';
 
 interface CleanNavbarProps {
   onOpenBooking: () => void;
@@ -10,48 +10,11 @@ export const CleanNavbar: React.FC<CleanNavbarProps> = ({ onOpenBooking }) => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
-      
-      {/* Top Hotline Bar */}
-      <div className="w-full bg-[#0b152d] text-white text-[11px] font-medium py-1.5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2 text-emerald-400 font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>24/7 Board-Certified Physicians On-Call</span>
-            <span className="hidden sm:inline text-slate-500 font-normal">&bull; HIPAA &amp; CLIA Certified</span>
-          </div>
-
-          <a href="tel:+18007258263" className="flex items-center gap-1.5 text-slate-200 hover:text-white font-bold transition-colors">
-            <Phone className="w-3 h-3 text-blue-400" />
-            <span>Call Desk: +1 (800) 725-8263</span>
-          </a>
-        </div>
-      </div>
-
       {/* Main Nav Bar */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
         
         {/* Brand */}
         <div className="flex items-center gap-3">
-          {/* NexGen Digital Creator Tag */}
-          <a 
-            href="https://nexgendigital.tech" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="hidden md:flex items-center gap-2 group text-decoration-none"
-            title="Built by NexGen Digital"
-          >
-            <img 
-              src="https://res.cloudinary.com/sahbncq8/image/upload/v1786081222/NexG1en_alefcv.png" 
-              alt="NexGen Digital" 
-              className="h-7 w-auto object-contain group-hover:scale-105 transition-transform" 
-            />
-            <span className="text-[11px] font-medium text-slate-400">
-              By <strong className="text-slate-800 font-bold group-hover:text-blue-600 transition-colors">NexGen</strong>
-            </span>
-          </a>
-
-          <div className="hidden md:block w-px h-5 bg-slate-200"></div>
-
           {/* SalvaMedic Logo */}
           <a href="#" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">

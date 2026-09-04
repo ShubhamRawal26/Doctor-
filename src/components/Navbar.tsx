@@ -9,55 +9,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="w-full relative z-40">
-      
-      {/* Executive Top Banner Bar (USA Standard) */}
-      <div className="w-full bg-[#030b1e] text-white text-[11px] font-medium py-2 px-4 sm:px-6 lg:px-8 border-b border-slate-800/80">
-        <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Board-Certified Doctors On-Call 24/7
-            </span>
-            <span className="hidden md:inline text-slate-500">&bull;</span>
-            <span className="hidden md:inline text-slate-300">HIPAA &amp; CLIA Certified Medical Center</span>
-          </div>
-
-          <div className="flex items-center gap-4 text-slate-300">
-            <a href="tel:+18007258263" className="flex items-center gap-1.5 hover:text-white font-bold transition-colors">
-              <Phone className="w-3 h-3 text-blue-400" />
-              <span>Concierge Desk: +1 (800) 725-8263</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <header className="w-full relative z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
       {/* Main Floating Capsule Navigation Bar */}
-      <div className="w-full pt-3 pb-2 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
+      <div className="w-full py-3 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
         <div className="flex items-center justify-between gap-3">
           
           {/* Brand Identity */}
           <div className="flex items-center gap-3.5 shrink-0">
-            {/* NexGen Creator Brand Tag */}
-            <a 
-              href="https://nexgendigital.tech" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hidden md:flex items-center gap-2 group text-decoration-none"
-              title="Built by NexGen Digital"
-            >
-              <img 
-                src="https://res.cloudinary.com/sahbncq8/image/upload/v1786081222/NexG1en_alefcv.png" 
-                alt="NexGen Digital" 
-                className="h-7 w-auto object-contain group-hover:scale-105 transition-transform" 
-              />
-              <span className="text-[11px] font-medium text-slate-400 whitespace-nowrap">
-                Built by <strong className="text-slate-800 font-bold group-hover:text-blue-600 transition-colors">NexGen</strong>
-              </span>
-            </a>
-
-            <div className="hidden md:block w-px h-5 bg-slate-200"></div>
-
             {/* SalvaMedic Brand Emblem */}
             <a href="#" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
