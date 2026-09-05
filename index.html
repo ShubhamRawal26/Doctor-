@@ -69,20 +69,21 @@
       </nav>
 
       <!-- Action Button -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <button 
           onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
-          class="btn-primary text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-xs flex items-center gap-2 cursor-pointer"
+          class="btn-primary text-white font-bold text-xs px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-xs flex items-center gap-1.5 whitespace-nowrap cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]"
         >
-          <i data-lucide="calendar" class="w-4 h-4"></i>
-          <span>Schedule Appointment</span>
+          <i data-lucide="calendar" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
+          <span class="hidden sm:inline">Schedule Appointment</span>
+          <span class="sm:hidden">Schedule</span>
         </button>
 
         <!-- Mobile Menu Toggle -->
         <button 
           id="mobileMenuBtn"
           onclick="toggleMobileMenu()"
-          class="lg:hidden w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200"
+          class="lg:hidden w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200 transition-colors"
           aria-label="Toggle menu"
         >
           <i data-lucide="menu" id="menuIcon" class="w-4 h-4"></i>
@@ -169,17 +170,17 @@
 
             <!-- Clean Search (Quick Symptom / Specialist Search) -->
             <form onsubmit="handleSearchSubmit(event)" class="max-w-xl pt-1">
-              <div class="flex items-center bg-white rounded-2xl p-1.5 pl-4 border border-slate-200 shadow-xs focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition-all">
+              <div class="flex items-center bg-white rounded-2xl p-1.5 pl-3 sm:pl-4 border border-slate-200 shadow-xs focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition-all">
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 mr-2 shrink-0"></i>
                 <input 
                   id="heroSearchInput"
                   type="text"
-                  placeholder="Search symptoms, doctor, or test (e.g. fever, blood pressure, sugar, heart)..."
-                  class="w-full px-1 py-2 text-xs sm:text-sm text-slate-800 bg-transparent outline-none placeholder:text-slate-400 font-medium"
+                  placeholder="Search symptoms, doctor, or test..."
+                  class="min-w-0 flex-1 px-1 py-2 text-xs sm:text-sm text-slate-800 bg-transparent outline-none placeholder:text-slate-400 font-medium"
                 />
                 <button 
                   type="submit"
-                  class="btn-primary text-white text-xs font-bold px-4 py-2.5 rounded-xl shrink-0 cursor-pointer"
+                  class="btn-primary text-white text-xs font-bold px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl shrink-0 cursor-pointer"
                 >
                   Search
                 </button>
@@ -187,18 +188,18 @@
             </form>
 
             <!-- Inline Trust Strip (Zero Box-in-a-Box) -->
-            <div class="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-xs sm:text-sm text-slate-600">
+            <div class="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-slate-600">
               <div class="flex items-center gap-1.5 font-bold text-slate-800">
-                <i data-lucide="star" class="w-4 h-4 fill-amber-500 text-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 text-amber-500 shrink-0"></i>
                 <span>4.9 / 5 Rating</span>
                 <span class="text-slate-400 font-normal">(1,400+ Families)</span>
               </div>
               <div class="flex items-center gap-1.5 text-slate-700 font-semibold">
-                <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i>
+                <i data-lucide="clock" class="w-4 h-4 text-blue-600 shrink-0"></i>
                 <span>Under 8-Minute Average Wait</span>
               </div>
               <div class="flex items-center gap-1.5 text-slate-700 font-semibold">
-                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 shrink-0"></i>
                 <span>100% Board-Certified Doctors</span>
               </div>
             </div>
