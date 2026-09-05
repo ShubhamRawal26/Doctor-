@@ -119,3 +119,12 @@ body {
 .float-delayed {
   animation: floatGentle 5s ease-in-out 2.5s infinite;
 }
+
+/* Hide scrollbars for clean carousel presentation */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

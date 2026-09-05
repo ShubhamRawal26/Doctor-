@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Sequential Scroll-Triggered Animation Observer
   initScrollAnimations();
+
+  // Automatic Facilities Slider (advances every 1s, pauses on hover/touch)
+  initFacilityAutoSlider();
 });
 
 /**
@@ -79,7 +82,91 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
-// Facility Category Filtering
+// Automatic Facilities Carousel Slider (1-second interval)
+let facilitySliderInterval = null;
+
+function initFacilityAutoSlider() {
+  const track = document.getElementById('facilityCarouselTrack');
+  if (!track) return;
+
+  function getStep() {
+    const firstCard = track.querySelector('.facility-slide-card');
+    if (firstCard) {
+      return firstCard.offsetWidth + 24; // Card width + gap-6 (24px)
+    }
+    return 320;
+  }
+
+  function advanceSlide() {
+    const step = getStep();
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= maxScroll - 15) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: step, behavior: 'smooth' });
+    }
+  }
+
+  function startTimer() {
+    if (facilitySliderInterval) clearInterval(facilitySliderInterval);
+    facilitySliderInterval = setInterval(advanceSlide, 1000);
+  }
+
+  function stopTimer() {
+    if (facilitySliderInterval) {
+      clearInterval(facilitySliderInterval);
+      facilitySliderInterval = null;
+    }
+  }
+
+  startTimer();
+
+  track.addEventListener('mouseenter', stopTimer);
+  track.addEventListener('mouseleave', startTimer);
+  track.addEventListener('touchstart', stopTimer, { passive: true });
+  track.addEventListener('touchend', startTimer, { passive: true });
+}
+
+function slideFacilities(direction) {
+  const track = document.getElementById('facilityCarouselTrack');
+  if (!track) return;
+
+  const firstCard = track.querySelector('.facility-slide-card');
+  const step = firstCard ? (firstCard.offsetWidth + 24) : 320;
+  const maxScroll = track.scrollWidth - track.clientWidth;
+
+  if (direction > 0) {
+    if (track.scrollLeft >= maxScroll - 15) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: step, behavior: 'smooth' });
+    }
+  } else {
+    if (track.scrollLeft <= 15) {
+      track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: -step, behavior: 'smooth' });
+    }
+  }
+
+  // Reset 1-second auto interval after manual interaction
+  if (facilitySliderInterval) {
+    clearInterval(facilitySliderInterval);
+    facilitySliderInterval = setInterval(() => {
+      const currentTrack = document.getElementById('facilityCarouselTrack');
+      if (!currentTrack) return;
+      const currentStep = firstCard ? (firstCard.offsetWidth + 24) : 320;
+      const currentMax = currentTrack.scrollWidth - currentTrack.clientWidth;
+      if (currentTrack.scrollLeft >= currentMax - 15) {
+        currentTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        currentTrack.scrollBy({ left: currentStep, behavior: 'smooth' });
+      }
+    }, 1000);
+  }
+}
+
+// Facility Category Filtering (if used)
 function filterFacilities(category, btnElement) {
   document.querySelectorAll('.facility-filter-btn').forEach(btn => {
     btn.classList.remove('bg-blue-600', 'text-white', 'shadow-xs');
