@@ -33,8 +33,10 @@ function filterFacilities(category, btnElement) {
     btn.classList.add('text-slate-600');
   });
   
-  btnElement.classList.add('bg-blue-600', 'text-white', 'shadow-2xs');
-  btnElement.classList.remove('text-slate-600');
+  if (btnElement) {
+    btnElement.classList.add('bg-blue-600', 'text-white', 'shadow-2xs');
+    btnElement.classList.remove('text-slate-600');
+  }
 
   const cards = document.querySelectorAll('.facility-card');
   cards.forEach(card => {
@@ -57,14 +59,31 @@ function openLightbox(imgSrc, title, dept) {
   if (titleEl) titleEl.textContent = title;
   if (deptEl) deptEl.textContent = dept;
   if (modal) modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
   const modal = document.getElementById('lightboxModal');
   if (modal) modal.classList.add('hidden');
+  document.body.style.overflow = '';
 }
 
-// FAQ Accordion Toggle
+// FAQ Accordion Toggle (Handles both class-based and id-based)
+function toggleFAQ(id) {
+  const answer = document.getElementById(`faq-answer-${id}`);
+  const icon = document.getElementById(`faq-icon-${id}`);
+  if (!answer) return;
+
+  const isHidden = answer.classList.contains('hidden');
+  if (isHidden) {
+    answer.classList.remove('hidden');
+    if (icon) icon.classList.add('rotate-180', 'text-blue-600');
+  } else {
+    answer.classList.add('hidden');
+    if (icon) icon.classList.remove('rotate-180', 'text-blue-600');
+  }
+}
+
 function toggleFaq(button) {
   const item = button.closest('.faq-item');
   if (!item) return;
@@ -88,6 +107,64 @@ function toggleFaq(button) {
   }
 }
 
+// Insurance Checker Logic
+const insurancePlans = {
+  'Blue Cross Blue Shield': { tier: 'Tier 1 In-Network', copay: '$20 – $35', desc: '100% covered for preventative & annual executive checkups.' },
+  'Aetna PPO & POS': { tier: 'Tier 1 Preferred In-Network', copay: '$25 – $40', desc: 'Full diagnostic lab, 3T MRI, and specialist visits covered.' },
+  'UnitedHealthcare': { tier: 'Choice Plus In-Network', copay: '$20 – $30', desc: 'Same-day urgent care and video telehealth pre-authorized.' },
+  'Cigna Open Access': { tier: 'National Preferred In-Network', copay: '$25 – $35', desc: 'Comprehensive cardiology, pediatrics, and preventive screening.' },
+  'Medicare Part B & Advantage': { tier: 'Full Participating Provider', copay: '$0 – $20', desc: 'Annual wellness exams, digital labs, and chronic care management.' },
+  'Humana Premier': { tier: 'In-Network Tier 1', copay: '$20 – $40', desc: 'Diagnostic sonography and specialist consults approved.' },
+  'Direct Concierge Self-Pay': { tier: 'Transparent HSA/FSA Eligible', copay: 'No Surprise Fees', desc: 'Flat transparent upfront rates with instant itemized reimbursement receipts.' }
+};
+
+function updateInsurancePlan(planName) {
+  const info = insurancePlans[planName] || insurancePlans['Blue Cross Blue Shield'];
+  const tierEl = document.getElementById('insTierBadge');
+  const copayEl = document.getElementById('insCopayVal');
+  const descEl = document.getElementById('insDescText');
+  const btnEl = document.getElementById('insBookBtnText');
+
+  if (tierEl) tierEl.textContent = info.tier;
+  if (copayEl) copayEl.textContent = info.copay;
+  if (descEl) descEl.textContent = info.desc;
+  if (btnEl) btnEl.textContent = `Book Appointment With ${planName}`;
+}
+
+// Pricing Toggle Logic (Insurance vs Self-Pay)
+function setPricingMode(mode) {
+  const btnIns = document.getElementById('pricingBtnInsurance');
+  const btnSelf = document.getElementById('pricingBtnSelf');
+  const p1Price = document.getElementById('pricingTier1Price');
+  const p1Sub = document.getElementById('pricingTier1Sub');
+  const p2Price = document.getElementById('pricingTier2Price');
+  const p2Sub = document.getElementById('pricingTier2Sub');
+
+  if (mode === 'insurance') {
+    if (btnIns) {
+      btnIns.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-[#0b152d] shadow-sm cursor-pointer';
+    }
+    if (btnSelf) {
+      btnSelf.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all text-slate-500 hover:text-slate-900 cursor-pointer';
+    }
+    if (p1Price) p1Price.textContent = '$20';
+    if (p1Sub) p1Sub.textContent = 'Typical In-Network Copay';
+    if (p2Price) p2Price.textContent = '$0 – $50';
+    if (p2Sub) p2Sub.textContent = 'Covered under Annual Wellness';
+  } else {
+    if (btnIns) {
+      btnIns.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all text-slate-500 hover:text-slate-900 cursor-pointer';
+    }
+    if (btnSelf) {
+      btnSelf.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-[#0b152d] shadow-sm cursor-pointer';
+    }
+    if (p1Price) p1Price.textContent = '$125';
+    if (p1Sub) p1Sub.textContent = 'flat self-pay fee';
+    if (p2Price) p2Price.textContent = '$295';
+    if (p2Sub) p2Sub.textContent = 'one-time complete';
+  }
+}
+
 // Appointment Booking Drawer / Modal
 function openBookingModal(serviceName, doctorName) {
   if (serviceName) {
@@ -95,8 +172,11 @@ function openBookingModal(serviceName, doctorName) {
     if (serviceSelect) serviceSelect.value = serviceName;
   }
   if (doctorName) {
-    const doctorSelect = document.getElementById('modalDoctorInput');
-    if (doctorSelect) doctorSelect.value = doctorName;
+    const doctorInput = document.getElementById('modalDoctorInput');
+    if (doctorInput) {
+      // Check if it's an input or select
+      doctorInput.value = doctorName;
+    }
   }
   
   const formContainer = document.getElementById('bookingFormContainer');

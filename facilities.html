@@ -439,18 +439,18 @@
   </footer>
 
   <!-- Lightbox Modal -->
-  <div id="lightboxModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md" onclick="closeLightbox()">
-    <div class="relative max-w-4xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl" onclick="event.stopPropagation()">
-      <div class="relative max-h-[75vh] flex items-center justify-center bg-black">
+  <div id="lightboxModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs" onclick="closeLightbox()">
+    <div class="relative max-w-4xl w-full bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-xl" onclick="event.stopPropagation()">
+      <div class="relative max-h-[75vh] flex items-center justify-center bg-slate-100">
         <img id="lightboxImg" src="" alt="4K Facility" class="max-h-[75vh] w-auto object-contain">
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 text-white hover:bg-white/40 flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-slate-700 flex items-center justify-center shadow-md transition-colors cursor-pointer" aria-label="Close modal">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
-      <div class="p-5 flex items-center justify-between bg-slate-900 text-white">
+      <div class="p-5 flex items-center justify-between bg-white border-t border-slate-100">
         <div>
-          <span id="lightboxDept" class="text-[10px] uppercase tracking-wider text-blue-400 font-extrabold"></span>
-          <h4 id="lightboxTitle" class="text-base font-bold text-white"></h4>
+          <span id="lightboxDept" class="text-[10px] uppercase tracking-wider text-blue-600 font-extrabold"></span>
+          <h4 id="lightboxTitle" class="text-base font-bold text-slate-900"></h4>
         </div>
         <button onclick="closeLightbox(); openBookingModal('Facility Tour & Consult', 'Dr. Maria Kovalenko, MD')" class="btn-primary text-white text-xs font-bold px-4 py-2 rounded-full cursor-pointer">
           Book Visit in This Suite
@@ -460,7 +460,7 @@
   </div>
 
   <!-- Booking Modal -->
-  <div id="bookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md">
+  <div id="bookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-xs">
     <div class="relative w-full max-w-xl bg-white rounded-[32px] shadow-2xl border border-slate-200/80 overflow-hidden flex flex-col max-h-[90vh]">
       <div class="flex items-center justify-between p-6 sm:px-8 border-b border-slate-100 bg-gradient-to-r from-blue-50/50 via-white to-white">
         <div class="flex items-center gap-3">
@@ -487,7 +487,7 @@
               <option value="Pediatrics & Infant Care">Pediatrics &amp; Infant Care</option>
               <option value="Women’s Health & Longevity">Women’s Health &amp; Longevity</option>
               <option value="3T High-Field MRI & Lab">3T High-Field MRI &amp; Diagnostics</option>
-              <option value="Virtual Telehealth Consult">24/7 Virtual Telehealth Video Consult</option>
+              <option value="Preventive & Executive Physical">Preventive &amp; Executive Physical</option>
             </select>
           </div>
 
