@@ -1,35 +1,121 @@
 /* ============================================================
-   SalvaMedic Innovation Clinic — Custom Styles
+   SalvaMedic Clinic — Apple-Level Design & Animation System
    ============================================================ */
 
 body {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth Spring Hover Animations */
-.spring-hover {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.25s ease;
+/* Apple-Style Glass Surface */
+.apple-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-.spring-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 32px -8px rgba(11, 21, 45, 0.08);
+/* Subtle Ambient Shadow & Soft Border Glow (Strictly Zero Neon) */
+.apple-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 1px 3px rgba(15, 23, 42, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
 }
 
-/* Primary Button Styling with Interactive Feedback */
+.apple-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 20px 35px -8px rgba(37, 99, 235, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+}
+
+/* Featured Apple Card with Elegant Blue Ambient Aura */
+.apple-card-featured {
+  background: #ffffff;
+  border: 1.5px solid rgba(37, 99, 235, 0.4);
+  box-shadow: 0 12px 30px -6px rgba(37, 99, 235, 0.09), 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-card-featured:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 45px -8px rgba(37, 99, 235, 0.14), 0 6px 16px rgba(15, 23, 42, 0.04);
+}
+
+/* Primary Button Styling with Tactile Micro-Feedback */
 .btn-primary {
-  background: linear-gradient(135deg, #0062ff 0%, #004ecc 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #3b82f6 100%);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.2s ease;
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px -4px rgba(0, 98, 255, 0.35);
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35);
+  filter: brightness(1.03);
 }
 
 .btn-primary:active {
   transform: translateY(1px);
+  box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.3);
+}
+
+/* Secondary Button Styling */
+.btn-secondary {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   Sequential Scroll-Triggered Animation System (Intersection Observer)
+   ============================================================ */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Timing Delays for Grid Elements */
+.delay-1 { transition-delay: 80ms; }
+.delay-2 { transition-delay: 160ms; }
+.delay-3 { transition-delay: 240ms; }
+.delay-4 { transition-delay: 320ms; }
+.delay-5 { transition-delay: 400ms; }
+.delay-6 { transition-delay: 480ms; }
+.delay-7 { transition-delay: 560ms; }
+.delay-8 { transition-delay: 640ms; }
+
+/* Subtle floating badge micro-animation */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.float-slow {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+.float-delayed {
+  animation: floatGentle 5s ease-in-out 2.5s infinite;
 }

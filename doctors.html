@@ -143,140 +143,280 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <!-- Doctor 1: Dr. Maria Kovalenko -->
-        <div class="bg-white rounded-[36px] p-6 sm:p-8 border border-slate-200/90 shadow-2xs spring-hover flex flex-col lg:flex-row gap-6 items-center">
-          <div class="relative w-full lg:w-48 h-64 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2">
-            <img src="assets/images/hero-doctor.png" alt="Dr. Maria Kovalenko" class="max-h-full w-auto object-contain" onerror="this.src='assets/images/hero-doctor.jpg'">
-            <span class="absolute top-2 left-2 bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>Available Today</span>
-            </span>
-          </div>
-          <div class="flex-1 space-y-3">
-            <div class="flex items-center justify-between">
+        <div class="apple-card scroll-reveal delay-1 p-6 sm:p-8 flex flex-col justify-between">
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="relative w-full sm:w-48 h-60 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2 border border-slate-100">
+              <img src="assets/images/hero-doctor.png" alt="Dr. Maria Kovalenko" class="max-h-full w-auto object-contain" onerror="this.src='assets/images/hero-doctor.jpg'">
+              <span class="absolute top-2.5 left-2.5 bg-emerald-50 border border-emerald-200/60 text-emerald-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Available Today</span>
+              </span>
+            </div>
+            
+            <div class="flex-1 space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Maria Kovalenko, MD</h2>
+                  <p class="text-xs font-bold text-blue-600">Head Physician &bull; Family &amp; General Medicine</p>
+                </div>
+                <div class="flex items-center gap-1 bg-amber-50 border border-amber-200/50 text-amber-800 px-2 py-0.5 rounded-full text-xs font-bold shrink-0">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-500 text-amber-500"></i>
+                  <span>4.98</span>
+                  <span class="text-slate-400 font-normal text-[10px]">(2,400+)</span>
+                </div>
+              </div>
+
+              <!-- Specifications List -->
+              <div class="space-y-1.5 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-2xl border border-slate-100">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Qualifications:</strong> MBBS, MD (Internal Medicine) &bull; Charit&eacute; Berlin</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Experience:</strong> 14+ Years Caring for Families</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="languages" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Languages:</strong> English, Spanish, German, Ukrainian</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Visiting Hours:</strong> Mon - Fri: 8:30 AM &ndash; 4:30 PM | Sat: 9:00 AM &ndash; 1:00 PM</span>
+                </div>
+              </div>
+
+              <!-- Conditions Treated -->
               <div>
-                <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Maria Kovalenko, MD</h2>
-                <p class="text-xs font-bold text-blue-600">Lead Attending &bull; Internal Medicine</p>
-              </div>
-              <div class="flex items-center gap-1 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-bold">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 text-amber-500"></i>
-                <span>4.98</span>
-                <span class="text-slate-400 font-normal">(2,400+)</span>
+                <div class="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Common Conditions Treated:</div>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">High Blood Pressure</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Diabetes Care</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Seasonal Flu &amp; Cough</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">General Weakness</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Routine Checkups</span>
+                </div>
               </div>
             </div>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              Charité &amp; Berlin Medical Fellow with 14+ years specializing in chronic disease reversal, metabolic longevity, and comprehensive diagnostics.
-            </p>
-            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl space-y-1">
-              <div><strong class="text-slate-900">Languages:</strong> English, German, Ukrainian</div>
-              <div><strong class="text-slate-900">Next Opening:</strong> Today 11:30 AM</div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100 gap-4">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Consultation Fee</span>
+              <span class="text-lg font-extrabold text-[#0b152d]">$25 <span class="text-xs font-normal text-slate-500">(Flat fee, no extra charge)</span></span>
             </div>
-            <button onclick="openBookingModal('Internal Medicine', 'Dr. Maria Kovalenko, MD')" class="w-full btn-primary text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-              <span>Book Appointment with Dr. Kovalenko</span>
+            <button onclick="openBookingModal('General Medicine', 'Dr. Maria Kovalenko, MD')" class="btn-primary text-white font-bold text-xs px-5 py-2.5 rounded-xl flex items-center gap-2 cursor-pointer shadow-sm">
+              <span>Book Appointment</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
 
         <!-- Doctor 2: Dr. Alexander Chen -->
-        <div class="bg-white rounded-[36px] p-6 sm:p-8 border border-slate-200/90 shadow-2xs spring-hover flex flex-col lg:flex-row gap-6 items-center">
-          <div class="relative w-full lg:w-48 h-64 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2">
-            <img src="assets/images/doc-chen.jpg" alt="Dr. Alexander Chen" class="max-h-full w-auto object-contain">
-            <span class="absolute top-2 left-2 bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>Available Today</span>
-            </span>
-          </div>
-          <div class="flex-1 space-y-3">
-            <div class="flex items-center justify-between">
+        <div class="apple-card scroll-reveal delay-2 p-6 sm:p-8 flex flex-col justify-between">
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="relative w-full sm:w-48 h-60 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2 border border-slate-100">
+              <img src="assets/images/doc-chen.jpg" alt="Dr. Alexander Chen" class="max-h-full w-auto object-contain">
+              <span class="absolute top-2.5 left-2.5 bg-emerald-50 border border-emerald-200/60 text-emerald-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Available Today</span>
+              </span>
+            </div>
+            
+            <div class="flex-1 space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Alexander Chen, MD</h2>
+                  <p class="text-xs font-bold text-blue-600">Senior Heart Specialist &bull; Cardiology</p>
+                </div>
+                <div class="flex items-center gap-1 bg-amber-50 border border-amber-200/50 text-amber-800 px-2 py-0.5 rounded-full text-xs font-bold shrink-0">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-500 text-amber-500"></i>
+                  <span>4.95</span>
+                  <span class="text-slate-400 font-normal text-[10px]">(1,850+)</span>
+                </div>
+              </div>
+
+              <!-- Specifications List -->
+              <div class="space-y-1.5 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-2xl border border-slate-100">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Qualifications:</strong> MD, FACC (Cardiology) &bull; Johns Hopkins Fellow</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Experience:</strong> 16+ Years Heart &amp; Circulation Care</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="languages" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Languages:</strong> English, Mandarin, Spanish</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Visiting Hours:</strong> Mon - Thu: 9:00 AM &ndash; 5:00 PM | Fri: 9:00 AM &ndash; 2:00 PM</span>
+                </div>
+              </div>
+
+              <!-- Conditions Treated -->
               <div>
-                <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Alexander Chen, MD</h2>
-                <p class="text-xs font-bold text-blue-600">Chief of Interventional Cardiology</p>
-              </div>
-              <div class="flex items-center gap-1 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-bold">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 text-amber-500"></i>
-                <span>4.95</span>
-                <span class="text-slate-400 font-normal">(1,850+)</span>
+                <div class="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Common Conditions Treated:</div>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Chest Pain &amp; Angina</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Irregular Heartbeat</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">High Cholesterol</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Post-Attack Recovery</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">ECG &amp; Stress Tests</span>
+                </div>
               </div>
             </div>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              Board-certified interventional cardiologist with 16+ years specializing in complex arrhythmia triage, hypertension management, and coronary ultrasound.
-            </p>
-            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl space-y-1">
-              <div><strong class="text-slate-900">Languages:</strong> English, Mandarin, Polish</div>
-              <div><strong class="text-slate-900">Next Opening:</strong> Today 02:00 PM</div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100 gap-4">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Consultation Fee</span>
+              <span class="text-lg font-extrabold text-[#0b152d]">$35 <span class="text-xs font-normal text-slate-500">(Includes rapid ECG check)</span></span>
             </div>
-            <button onclick="openBookingModal('Cardiology & Heart Center', 'Dr. Alexander Chen, MD')" class="w-full btn-primary text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-              <span>Book Appointment with Dr. Chen</span>
+            <button onclick="openBookingModal('Cardiology & Heart Center', 'Dr. Alexander Chen, MD')" class="btn-primary text-white font-bold text-xs px-5 py-2.5 rounded-xl flex items-center gap-2 cursor-pointer shadow-sm">
+              <span>Book Appointment</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
 
         <!-- Doctor 3: Dr. Sarah Jensen -->
-        <div class="bg-white rounded-[36px] p-6 sm:p-8 border border-slate-200/90 shadow-2xs spring-hover flex flex-col lg:flex-row gap-6 items-center">
-          <div class="relative w-full lg:w-48 h-64 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2">
-            <img src="assets/images/doc-jensen.jpg" alt="Dr. Sarah Jensen" class="max-h-full w-auto object-contain">
-            <span class="absolute top-2 left-2 bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>Available Tomorrow</span>
-            </span>
-          </div>
-          <div class="flex-1 space-y-3">
-            <div class="flex items-center justify-between">
+        <div class="apple-card scroll-reveal delay-3 p-6 sm:p-8 flex flex-col justify-between">
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="relative w-full sm:w-48 h-60 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2 border border-slate-100">
+              <img src="assets/images/doc-jensen.jpg" alt="Dr. Sarah Jensen" class="max-h-full w-auto object-contain">
+              <span class="absolute top-2.5 left-2.5 bg-emerald-50 border border-emerald-200/60 text-emerald-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Available Tomorrow</span>
+              </span>
+            </div>
+            
+            <div class="flex-1 space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Sarah Jensen, MD</h2>
+                  <p class="text-xs font-bold text-blue-600">Chief Pediatrician &bull; Children's Health</p>
+                </div>
+                <div class="flex items-center gap-1 bg-amber-50 border border-amber-200/50 text-amber-800 px-2 py-0.5 rounded-full text-xs font-bold shrink-0">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-500 text-amber-500"></i>
+                  <span>4.99</span>
+                  <span class="text-slate-400 font-normal text-[10px]">(3,100+)</span>
+                </div>
+              </div>
+
+              <!-- Specifications List -->
+              <div class="space-y-1.5 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-2xl border border-slate-100">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Qualifications:</strong> MBBS, DCH, MD (Pediatrics) &bull; Oxford University</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Experience:</strong> 12+ Years Child &amp; Infant Healthcare</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="languages" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Languages:</strong> English, Danish, French, Spanish</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Visiting Hours:</strong> Mon - Sat: 8:00 AM &ndash; 3:30 PM</span>
+                </div>
+              </div>
+
+              <!-- Conditions Treated -->
               <div>
-                <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Sarah Jensen, MD</h2>
-                <p class="text-xs font-bold text-blue-600">Head of Pediatric Medicine</p>
-              </div>
-              <div class="flex items-center gap-1 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-bold">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 text-amber-500"></i>
-                <span>4.99</span>
-                <span class="text-slate-400 font-normal">(3,100+)</span>
+                <div class="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Common Conditions Treated:</div>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Childhood Fever &amp; Colds</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Asthma &amp; Wheezing</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Growth Tracking</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Routine Vaccinations</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Stomach Pain &amp; Digestion</span>
+                </div>
               </div>
             </div>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              Oxford University Fellow with 12+ years in pediatric immunology, childhood respiratory care, and developmental assessments in calm, child-friendly suites.
-            </p>
-            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl space-y-1">
-              <div><strong class="text-slate-900">Languages:</strong> English, Danish, French</div>
-              <div><strong class="text-slate-900">Next Opening:</strong> Tomorrow 09:15 AM</div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100 gap-4">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Consultation Fee</span>
+              <span class="text-lg font-extrabold text-[#0b152d]">$25 <span class="text-xs font-normal text-slate-500">(Kid-friendly suite &amp; sticker)</span></span>
             </div>
-            <button onclick="openBookingModal('Pediatrics & Infant Care', 'Dr. Sarah Jensen, MD')" class="w-full btn-primary text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-              <span>Book Appointment with Dr. Jensen</span>
+            <button onclick="openBookingModal('Pediatrics & Infant Care', 'Dr. Sarah Jensen, MD')" class="btn-primary text-white font-bold text-xs px-5 py-2.5 rounded-xl flex items-center gap-2 cursor-pointer shadow-sm">
+              <span>Book Appointment</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
 
         <!-- Doctor 4: Dr. Viktor Novak -->
-        <div class="bg-white rounded-[36px] p-6 sm:p-8 border border-slate-200/90 shadow-2xs spring-hover flex flex-col lg:flex-row gap-6 items-center">
-          <div class="relative w-full lg:w-48 h-64 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2">
-            <img src="assets/images/doc-novak.jpg" alt="Dr. Viktor Novak" class="max-h-full w-auto object-contain">
-            <span class="absolute top-2 left-2 bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>Available Today</span>
-            </span>
-          </div>
-          <div class="flex-1 space-y-3">
-            <div class="flex items-center justify-between">
+        <div class="apple-card scroll-reveal delay-4 p-6 sm:p-8 flex flex-col justify-between">
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="relative w-full sm:w-48 h-60 rounded-2xl overflow-hidden bg-slate-50 shrink-0 flex items-end justify-center p-2 border border-slate-100">
+              <img src="assets/images/doc-novak.jpg" alt="Dr. Viktor Novak" class="max-h-full w-auto object-contain">
+              <span class="absolute top-2.5 left-2.5 bg-emerald-50 border border-emerald-200/60 text-emerald-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Available Today</span>
+              </span>
+            </div>
+            
+            <div class="flex-1 space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Viktor Novak, MD, PhD</h2>
+                  <p class="text-xs font-bold text-blue-600">Director of Imaging &bull; 3T MRI &amp; Ultrasound</p>
+                </div>
+                <div class="flex items-center gap-1 bg-amber-50 border border-amber-200/50 text-amber-800 px-2 py-0.5 rounded-full text-xs font-bold shrink-0">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-500 text-amber-500"></i>
+                  <span>4.97</span>
+                  <span class="text-slate-400 font-normal text-[10px]">(1,620+)</span>
+                </div>
+              </div>
+
+              <!-- Specifications List -->
+              <div class="space-y-1.5 text-xs text-slate-600 bg-slate-50/80 p-3 rounded-2xl border border-slate-100">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Qualifications:</strong> MD, PhD (Radiology) &bull; Charles University Prague</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Experience:</strong> 18+ Years Advanced Scan &amp; Diagnostics</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="languages" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Languages:</strong> English, Czech, Ukrainian, German</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
+                  <span><strong>Visiting Hours:</strong> Mon - Fri: 7:30 AM &ndash; 6:00 PM | Sat: 8:00 AM &ndash; 2:00 PM</span>
+                </div>
+              </div>
+
+              <!-- Conditions Treated -->
               <div>
-                <h2 class="text-xl font-extrabold text-[#0b152d]">Dr. Viktor Novak, MD, PhD</h2>
-                <p class="text-xs font-bold text-blue-600">Director of Radiology &amp; MRI Imaging</p>
-              </div>
-              <div class="flex items-center gap-1 bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full text-xs font-bold">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 text-amber-500"></i>
-                <span>4.97</span>
-                <span class="text-slate-400 font-normal">(1,620+)</span>
+                <div class="text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">Common Conditions Treated:</div>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Full Body MRI Scans</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Spine &amp; Joint Pain</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Abdominal Ultrasound</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Thyroid Nodules</span>
+                  <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-semibold border border-blue-100">Same-Day Digital Reports</span>
+                </div>
               </div>
             </div>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              European Board of Radiology member with 18+ years leading cross-sectional 3T MRI diagnostics, acoustic sonography, and musculoskeletal imaging.
-            </p>
-            <div class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl space-y-1">
-              <div><strong class="text-slate-900">Languages:</strong> English, Czech, Ukrainian</div>
-              <div><strong class="text-slate-900">Next Opening:</strong> Today 04:30 PM</div>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-100 gap-4">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Consultation Fee</span>
+              <span class="text-lg font-extrabold text-[#0b152d]">$35 <span class="text-xs font-normal text-slate-500">(Includes scan report review)</span></span>
             </div>
-            <button onclick="openBookingModal('3T High-Field MRI & Lab', 'Dr. Viktor Novak, MD, PhD')" class="w-full btn-primary text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-              <span>Book Appointment with Dr. Novak</span>
+            <button onclick="openBookingModal('3T High-Field MRI & Lab', 'Dr. Viktor Novak, MD, PhD')" class="btn-primary text-white font-bold text-xs px-5 py-2.5 rounded-xl flex items-center gap-2 cursor-pointer shadow-sm">
+              <span>Book Appointment</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
           </div>

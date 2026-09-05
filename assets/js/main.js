@@ -2,7 +2,7 @@
  * SalvaMedic Innovation Clinic — Main Client-Side Logic
  */
 
-// Initialize Lucide Icons & Defaults on Page Load
+// Initialize Lucide Icons, Date Defaults, and Scroll-Triggered Reveal Animations
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) {
     window.lucide.createIcons();
@@ -16,7 +16,40 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dateInput) {
     dateInput.value = dateStr;
   }
+
+  // Sequential Scroll-Triggered Animation Observer
+  initScrollAnimations();
 });
+
+/**
+ * Sequential Intersection Observer:
+ * Animates elements one by one as they scroll into view.
+ */
+function initScrollAnimations() {
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+  
+  if (!('IntersectionObserver' in window)) {
+    // Fallback if browser does not support IntersectionObserver
+    revealElements.forEach(el => el.classList.add('revealed'));
+    return;
+  }
+
+  const observerOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        obs.unobserve(entry.target); // Reveal once smoothly
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => observer.observe(el));
+}
 
 // Mobile Menu Drawer Toggle
 function toggleMobileMenu() {
@@ -24,28 +57,6 @@ function toggleMobileMenu() {
   if (drawer) {
     drawer.classList.toggle('hidden');
   }
-}
-
-// Facility Category Filtering
-function filterFacilities(category, btnElement) {
-  document.querySelectorAll('.facility-filter-btn').forEach(btn => {
-    btn.classList.remove('bg-blue-600', 'text-white', 'shadow-2xs');
-    btn.classList.add('text-slate-600');
-  });
-  
-  if (btnElement) {
-    btnElement.classList.add('bg-blue-600', 'text-white', 'shadow-2xs');
-    btnElement.classList.remove('text-slate-600');
-  }
-
-  const cards = document.querySelectorAll('.facility-card');
-  cards.forEach(card => {
-    if (category === 'all' || card.getAttribute('data-category') === category) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
-    }
-  });
 }
 
 // 4K Facility Lightbox Modal
@@ -68,7 +79,29 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
-// FAQ Accordion Toggle (Handles both class-based and id-based)
+// Facility Category Filtering
+function filterFacilities(category, btnElement) {
+  document.querySelectorAll('.facility-filter-btn').forEach(btn => {
+    btn.classList.remove('bg-blue-600', 'text-white', 'shadow-xs');
+    btn.classList.add('text-slate-600');
+  });
+  
+  if (btnElement) {
+    btnElement.classList.add('bg-blue-600', 'text-white', 'shadow-xs');
+    btnElement.classList.remove('text-slate-600');
+  }
+
+  const cards = document.querySelectorAll('.facility-card');
+  cards.forEach(card => {
+    if (category === 'all' || card.getAttribute('data-category') === category) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+// FAQ Accordion Toggle
 function toggleFAQ(id) {
   const answer = document.getElementById(`faq-answer-${id}`);
   const icon = document.getElementById(`faq-icon-${id}`);
@@ -84,88 +117,7 @@ function toggleFAQ(id) {
   }
 }
 
-function toggleFaq(button) {
-  const item = button.closest('.faq-item');
-  if (!item) return;
-  
-  const content = item.querySelector('.faq-content');
-  const wrapper = item.querySelector('.faq-icon-wrapper');
-  const isCurrentlyOpen = !content.classList.contains('hidden');
-
-  // Close all other FAQs
-  document.querySelectorAll('.faq-item').forEach(el => {
-    const elContent = el.querySelector('.faq-content');
-    const elWrapper = el.querySelector('.faq-icon-wrapper');
-    if (elContent) elContent.classList.add('hidden');
-    if (elWrapper) elWrapper.classList.remove('rotate-180', 'bg-blue-50');
-  });
-
-  // If clicked FAQ was closed, open it
-  if (!isCurrentlyOpen) {
-    content.classList.remove('hidden');
-    if (wrapper) wrapper.classList.add('rotate-180', 'bg-blue-50');
-  }
-}
-
-// Insurance Checker Logic
-const insurancePlans = {
-  'Blue Cross Blue Shield': { tier: 'Tier 1 In-Network', copay: '$20 – $35', desc: '100% covered for preventative & annual executive checkups.' },
-  'Aetna PPO & POS': { tier: 'Tier 1 Preferred In-Network', copay: '$25 – $40', desc: 'Full diagnostic lab, 3T MRI, and specialist visits covered.' },
-  'UnitedHealthcare': { tier: 'Choice Plus In-Network', copay: '$20 – $30', desc: 'Same-day urgent care and video telehealth pre-authorized.' },
-  'Cigna Open Access': { tier: 'National Preferred In-Network', copay: '$25 – $35', desc: 'Comprehensive cardiology, pediatrics, and preventive screening.' },
-  'Medicare Part B & Advantage': { tier: 'Full Participating Provider', copay: '$0 – $20', desc: 'Annual wellness exams, digital labs, and chronic care management.' },
-  'Humana Premier': { tier: 'In-Network Tier 1', copay: '$20 – $40', desc: 'Diagnostic sonography and specialist consults approved.' },
-  'Direct Concierge Self-Pay': { tier: 'Transparent HSA/FSA Eligible', copay: 'No Surprise Fees', desc: 'Flat transparent upfront rates with instant itemized reimbursement receipts.' }
-};
-
-function updateInsurancePlan(planName) {
-  const info = insurancePlans[planName] || insurancePlans['Blue Cross Blue Shield'];
-  const tierEl = document.getElementById('insTierBadge');
-  const copayEl = document.getElementById('insCopayVal');
-  const descEl = document.getElementById('insDescText');
-  const btnEl = document.getElementById('insBookBtnText');
-
-  if (tierEl) tierEl.textContent = info.tier;
-  if (copayEl) copayEl.textContent = info.copay;
-  if (descEl) descEl.textContent = info.desc;
-  if (btnEl) btnEl.textContent = `Book Appointment With ${planName}`;
-}
-
-// Pricing Toggle Logic (Insurance vs Self-Pay)
-function setPricingMode(mode) {
-  const btnIns = document.getElementById('pricingBtnInsurance');
-  const btnSelf = document.getElementById('pricingBtnSelf');
-  const p1Price = document.getElementById('pricingTier1Price');
-  const p1Sub = document.getElementById('pricingTier1Sub');
-  const p2Price = document.getElementById('pricingTier2Price');
-  const p2Sub = document.getElementById('pricingTier2Sub');
-
-  if (mode === 'insurance') {
-    if (btnIns) {
-      btnIns.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-[#0b152d] shadow-sm cursor-pointer';
-    }
-    if (btnSelf) {
-      btnSelf.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all text-slate-500 hover:text-slate-900 cursor-pointer';
-    }
-    if (p1Price) p1Price.textContent = '$20';
-    if (p1Sub) p1Sub.textContent = 'Typical In-Network Copay';
-    if (p2Price) p2Price.textContent = '$0 – $50';
-    if (p2Sub) p2Sub.textContent = 'Covered under Annual Wellness';
-  } else {
-    if (btnIns) {
-      btnIns.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all text-slate-500 hover:text-slate-900 cursor-pointer';
-    }
-    if (btnSelf) {
-      btnSelf.className = 'px-6 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-[#0b152d] shadow-sm cursor-pointer';
-    }
-    if (p1Price) p1Price.textContent = '$125';
-    if (p1Sub) p1Sub.textContent = 'flat self-pay fee';
-    if (p2Price) p2Price.textContent = '$295';
-    if (p2Sub) p2Sub.textContent = 'one-time complete';
-  }
-}
-
-// Appointment Booking Drawer / Modal
+// Appointment Booking Modal
 function openBookingModal(serviceName, doctorName) {
   if (serviceName) {
     const serviceSelect = document.getElementById('modalServiceInput');
@@ -174,7 +126,6 @@ function openBookingModal(serviceName, doctorName) {
   if (doctorName) {
     const doctorInput = document.getElementById('modalDoctorInput');
     if (doctorInput) {
-      // Check if it's an input or select
       doctorInput.value = doctorName;
     }
   }
@@ -205,12 +156,8 @@ function handleSearchSubmit(e) {
   if (query) {
     openBookingModal(query, 'Dr. Maria Kovalenko, MD');
   } else {
-    openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD');
+    openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD');
   }
-}
-
-function handleQuickSearch(term) {
-  openBookingModal(term, 'Dr. Maria Kovalenko, MD');
 }
 
 // Booking Form Submission
@@ -228,10 +175,10 @@ function handleBookingSubmit(e) {
   const summaryDiv = document.getElementById('bookingSummaryDetails');
   if (summaryDiv) {
     summaryDiv.innerHTML = `
-      <div><strong>Ref Code:</strong> <span class="text-blue-600 font-bold">${refId}</span></div>
-      <div><strong>Patient:</strong> ${name} (${phone})</div>
-      <div><strong>Specialty:</strong> ${service}</div>
-      <div><strong>Physician:</strong> ${doctor}</div>
+      <div><strong>Appointment Code:</strong> <span class="text-blue-600 font-bold">${refId}</span></div>
+      <div><strong>Patient Name:</strong> ${name} (${phone})</div>
+      <div><strong>Department / Service:</strong> ${service}</div>
+      <div><strong>Assigned Doctor:</strong> ${doctor}</div>
       <div><strong>Date & Time:</strong> ${date} &bull; ${time}</div>
     `;
   }

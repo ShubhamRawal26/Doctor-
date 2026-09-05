@@ -123,101 +123,137 @@
   <main class="flex-1 flex flex-col">
 
     <!-- ============================================================
-         2. HERO SECTION WITH RICH BALANCED BACKGROUND
+         2. HERO SECTION — FLUID APPLE-GRADE ARCHITECTURE
     ============================================================ -->
-    <section class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-8 pb-12">
-      <div class="bg-gradient-to-b from-blue-50/70 via-sky-50/30 to-white rounded-3xl border border-blue-100 p-8 sm:p-12 shadow-sm">
+    <section class="relative w-full overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-20">
+      <!-- Soft Apple-Style Ambient Lighting (Zero Neon) -->
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-50/60 via-slate-50/20 to-white -z-10"></div>
+      <div class="absolute top-6 left-1/2 -translate-x-1/2 w-[650px] h-[320px] bg-gradient-to-tr from-blue-100/40 to-sky-100/30 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          <!-- Left: Headline, Search, Stats -->
-          <div class="lg:col-span-7 space-y-6">
+          <!-- Left: Clear Human Headline, Straightforward Actions, Trust Badges -->
+          <div class="lg:col-span-7 space-y-6 scroll-reveal">
             
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-800 text-xs font-bold border border-blue-200/70">
-              <i data-lucide="check-circle" class="w-3.5 h-3.5 text-blue-600"></i>
-              <span>Accredited Multi-Specialty Clinic &amp; Diagnostics</span>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-slate-200 shadow-xs text-xs font-semibold text-slate-700">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Open Daily &bull; Caring Family Doctors &bull; Fast Appointments</span>
             </div>
 
             <div>
-              <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                Compassionate Care, <br class="hidden sm:inline" />
-                <span class="text-blue-600">Advanced Medicine.</span>
+              <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+                Good Healthcare <br class="hidden sm:inline" />
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700">Made Simple &amp; Personal.</span>
               </h1>
 
-              <p class="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl mt-3.5">
-                Comprehensive outpatient healthcare, board-certified specialists, and on-site 3T MRI diagnostics with guaranteed minimal wait times.
+              <p class="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-xl mt-4">
+                Meet friendly, experienced doctors who listen and treat you like family. Get your doctor consultation, blood tests, and scans done in one clean place with zero long queues.
               </p>
             </div>
 
-            <!-- Search Care Form -->
-            <form onsubmit="handleSearchSubmit(event)" class="relative max-w-xl">
-              <div class="flex items-center bg-white rounded-2xl p-2 border border-slate-300 shadow-xs focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
-                <i data-lucide="search" class="w-5 h-5 text-slate-400 ml-3 shrink-0"></i>
+            <!-- Apple-Style Primary Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              <button 
+                onclick="openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD')"
+                class="btn-primary text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-2xl shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2.5 cursor-pointer"
+              >
+                <i data-lucide="calendar-plus" class="w-5 h-5"></i>
+                <span>Book Doctor Appointment</span>
+              </button>
+
+              <a 
+                href="#doctors"
+                class="btn-secondary font-semibold text-sm sm:text-base px-6 py-3.5 rounded-2xl flex items-center justify-center gap-2 text-slate-700 hover:text-blue-600 cursor-pointer"
+              >
+                <span>View Doctor Profiles</span>
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <!-- Clean Search (Quick Symptom / Specialist Search) -->
+            <form onsubmit="handleSearchSubmit(event)" class="max-w-xl pt-1">
+              <div class="flex items-center bg-white rounded-2xl p-1.5 pl-4 border border-slate-200 shadow-xs focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition-all">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 mr-2 shrink-0"></i>
                 <input 
                   id="heroSearchInput"
                   type="text"
-                  placeholder="Search by specialty, symptom, or physician..."
-                  class="w-full px-3 py-2 text-sm text-slate-900 bg-transparent outline-none placeholder:text-slate-400 font-medium"
+                  placeholder="Search symptoms, doctor, or test (e.g. fever, blood pressure, sugar, heart)..."
+                  class="w-full px-1 py-2 text-xs sm:text-sm text-slate-800 bg-transparent outline-none placeholder:text-slate-400 font-medium"
                 />
                 <button 
                   type="submit"
-                  class="btn-primary text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl shrink-0 flex items-center gap-1.5 cursor-pointer"
+                  class="btn-primary text-white text-xs font-bold px-4 py-2.5 rounded-xl shrink-0 cursor-pointer"
                 >
-                  <span>Search</span>
-                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  Search
                 </button>
               </div>
             </form>
 
-            <!-- Key Trust Metrics -->
-            <div class="pt-3 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-xs text-slate-600">
+            <!-- Inline Trust Strip (Zero Box-in-a-Box) -->
+            <div class="pt-4 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-xs sm:text-sm text-slate-600">
               <div class="flex items-center gap-1.5 font-bold text-slate-800">
                 <i data-lucide="star" class="w-4 h-4 fill-amber-500 text-amber-500"></i>
-                <span>4.98 / 5 Rating</span>
+                <span>4.9 / 5 Rating</span>
+                <span class="text-slate-400 font-normal">(1,400+ Families)</span>
               </div>
               <div class="flex items-center gap-1.5 text-slate-700 font-semibold">
                 <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i>
                 <span>Under 8-Minute Average Wait</span>
               </div>
               <div class="flex items-center gap-1.5 text-slate-700 font-semibold">
-                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
-                <span>Board-Certified Physicians</span>
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span>100% Board-Certified Doctors</span>
               </div>
             </div>
 
           </div>
 
-          <!-- Right: Attending Doctor Card with Distinct Clinic Background -->
-          <div class="lg:col-span-5">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md">
+          <!-- Right: Organic Doctor Showcase with Ambient Backlight (Fluid, No Box Nesting) -->
+          <div class="lg:col-span-5 relative scroll-reveal delay-2">
+            <!-- Ambient Glow Behind Doctor Card -->
+            <div class="absolute -inset-4 bg-gradient-to-tr from-blue-100/50 via-sky-100/30 to-blue-50/20 rounded-3xl blur-2xl -z-10"></div>
+            
+            <!-- Single Elegant Doctor Presentation Card -->
+            <div class="apple-card rounded-3xl p-6 bg-white/95 backdrop-blur-md">
               
-              <!-- Doctor Image Container with Beautiful Medical Studio Background -->
-              <div class="relative w-full h-80 rounded-2xl overflow-hidden mb-5 flex items-end justify-center bg-gradient-to-tr from-blue-900/10 via-sky-100 to-blue-50 border border-blue-200/70 shadow-inner">
-                <!-- Blurred Clinical Room Image Background -->
+              <!-- Doctor Portrait Canvas with Clinical Depth -->
+              <div class="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden mb-5 flex items-end justify-center bg-gradient-to-tr from-blue-900/10 via-sky-100/70 to-blue-50 border border-blue-200/60 shadow-inner">
+                <!-- Blurred Clinical Room Image -->
                 <img 
                   src="assets/images/consultation-4k.jpg" 
                   alt="Clinical Consultation Suite" 
-                  class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply filter blur-[1px]"
+                  class="absolute inset-0 w-full h-full object-cover opacity-25 filter blur-[1px]"
                 />
-                <!-- Soft Medical Glow Layer for High-Contrast Separation -->
-                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
-                <div class="absolute -bottom-6 w-48 h-48 bg-blue-500/15 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent"></div>
+                <div class="absolute -bottom-6 w-52 h-52 bg-blue-500/15 rounded-full blur-2xl pointer-events-none"></div>
 
-                <!-- Foreground Doctor Photo with Sharp Crisp Definition -->
+                <!-- Foreground Doctor Photo -->
                 <img 
                   src="assets/images/hero-doctor.png" 
-                  alt="Dr. Maria Kovalenko, Lead Physician" 
-                  class="relative z-10 max-h-[94%] w-auto object-contain drop-shadow-md"
+                  alt="Dr. Maria Kovalenko, Senior Physician" 
+                  class="relative z-10 max-h-[96%] w-auto object-contain drop-shadow-md"
                   onerror="this.src='assets/images/hero-doctor.jpg'"
                 />
+
+                <!-- Floating Apple Micro-Badges -->
+                <div class="absolute top-3.5 left-3.5 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-white/95 backdrop-blur-md rounded-full border border-slate-200/80 shadow-xs text-[11px] font-bold text-slate-800 float-slow">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Available Today</span>
+                </div>
+
+                <div class="absolute top-3.5 right-3.5 z-20 px-3 py-1.5 bg-white/95 backdrop-blur-md rounded-full border border-slate-200/80 shadow-xs text-[11px] font-bold text-blue-700 float-delayed">
+                  14+ Yrs Practice
+                </div>
               </div>
 
-              <!-- Doctor Metadata -->
+              <!-- Doctor Specifications Bar -->
               <div class="space-y-3">
                 <div class="flex items-center justify-between">
                   <div>
-                    <h3 class="text-base font-bold text-slate-900">Dr. Maria Kovalenko, MD</h3>
-                    <p class="text-xs text-slate-500 font-medium">Internal &amp; Preventive Medicine</p>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900">Dr. Maria Kovalenko, MD</h3>
+                    <p class="text-xs text-slate-500 font-medium">Senior Family Doctor &bull; MBBS, MD (Internal Medicine)</p>
                   </div>
                   <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                     Accepting Patients
@@ -225,12 +261,14 @@
                 </div>
 
                 <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs text-slate-500">14+ Years Practice</span>
+                  <div class="text-xs text-slate-600">
+                    <span class="text-slate-400">Consultation Fee:</span> <strong class="text-slate-900 font-bold">$25 flat fee</strong>
+                  </div>
                   <button 
-                    onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
-                    class="btn-primary text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1 cursor-pointer"
+                    onclick="openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD')"
+                    class="btn-primary text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 cursor-pointer"
                   >
-                    <span>Book Consultation</span>
+                    <span>Book Appointment</span>
                     <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                   </button>
                 </div>
@@ -241,36 +279,36 @@
 
         </div>
 
-        <!-- 3 Action Pillars -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-200/80">
+        <!-- 3 Seamless Action Cards (Apple-Grade Cards with Sequential Scroll Reveal) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-12 scroll-reveal delay-3">
           
-          <div onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')" class="p-4 bg-white hover:bg-blue-50/50 rounded-2xl border border-slate-200 transition-colors flex items-start gap-3.5 cursor-pointer shadow-2xs">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-              <i data-lucide="user-check" class="w-5 h-5"></i>
+          <div onclick="openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD')" class="apple-card p-5 rounded-2xl flex items-center gap-4 cursor-pointer">
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
+              <i data-lucide="stethoscope" class="w-6 h-6"></i>
             </div>
             <div>
-              <div class="text-sm font-bold text-slate-900">Senior Specialists</div>
-              <div class="text-xs text-slate-500 mt-0.5">Consultations with attending physicians</div>
+              <div class="text-sm font-bold text-slate-900">Friendly Senior Doctors</div>
+              <div class="text-xs text-slate-500 mt-0.5">Caring doctors who listen to you patiently</div>
             </div>
           </div>
 
-          <div onclick="openBookingModal('In-Person Clinic Visit', 'Dr. Maria Kovalenko, MD')" class="p-4 bg-white hover:bg-blue-50/50 rounded-2xl border border-slate-200 transition-colors flex items-start gap-3.5 cursor-pointer shadow-2xs">
-            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-              <i data-lucide="calendar" class="w-5 h-5"></i>
+          <div onclick="openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD')" class="apple-card p-5 rounded-2xl flex items-center gap-4 cursor-pointer">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+              <i data-lucide="clock" class="w-6 h-6"></i>
             </div>
             <div>
-              <div class="text-sm font-bold text-slate-900">Same-Day Clinic Visit</div>
-              <div class="text-xs text-slate-500 mt-0.5">Scheduled appointments with minimal wait</div>
+              <div class="text-sm font-bold text-slate-900">Zero-Wait Appointments</div>
+              <div class="text-xs text-slate-500 mt-0.5">Enter within 8 minutes of arrival</div>
             </div>
           </div>
 
-          <div onclick="openBookingModal('3T High-Field MRI & Lab', 'Dr. Viktor Novak, MD, PhD')" class="p-4 bg-white hover:bg-blue-50/50 rounded-2xl border border-slate-200 transition-colors flex items-start gap-3.5 cursor-pointer shadow-2xs">
-            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-              <i data-lucide="scan" class="w-5 h-5"></i>
+          <div onclick="openBookingModal('3T Digital MRI & Lab', 'Dr. Viktor Novak, MD, PhD')" class="apple-card p-5 rounded-2xl flex items-center gap-4 cursor-pointer">
+            <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-100">
+              <i data-lucide="activity" class="w-6 h-6"></i>
             </div>
             <div>
-              <div class="text-sm font-bold text-slate-900">3T MRI &amp; Diagnostic Lab</div>
-              <div class="text-xs text-slate-500 mt-0.5">Advanced digital imaging &amp; blood panels</div>
+              <div class="text-sm font-bold text-slate-900">All Tests &amp; Scans On-Site</div>
+              <div class="text-xs text-slate-500 mt-0.5">Blood lab, digital X-Ray, 3T MRI, &amp; ultrasound</div>
             </div>
           </div>
 
@@ -280,177 +318,312 @@
     </section>
 
     <!-- ============================================================
-         3. CLINICAL SPECIALTIES
+         3. CLINICAL SPECIALTIES (EASY, FRIENDLY DEPARTMENTS)
     ============================================================ -->
-    <section class="w-full px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto py-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+    <section class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 scroll-reveal">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Clinical Departments</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Care Departments</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Comprehensive Medical Specialties
+            Treatments &amp; Health Services
           </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Simple, comprehensive care for every member of your family.</p>
         </div>
         <a href="specialties.html" class="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
-          <span>View all departments</span>
+          <span>View all services</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        
+        <!-- Specialty 1 -->
+        <div class="apple-card rounded-2xl p-6 flex flex-col justify-between scroll-reveal delay-1">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+            <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 border border-blue-100">
               <i data-lucide="stethoscope" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">Primary &amp; Family Care</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Routine checkups, metabolic health screening, preventive care, and blood pressure management.</p>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Family &amp; General Doctor Care</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Treatment for seasonal fever, common cough, high blood pressure, diabetes, weakness, and everyday family health issues.</p>
           </div>
           <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
             Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Specialty 2 -->
+        <div class="apple-card rounded-2xl p-6 flex flex-col justify-between scroll-reveal delay-2">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4">
+            <div class="w-11 h-11 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4 border border-rose-100">
               <i data-lucide="heart-pulse" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">Cardiology &amp; Heart Health</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">12-Lead resting and stress ECG, echocardiograms, hypertension management, and lipid analysis.</p>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Heart Care &amp; ECG Testing</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Fast 12-lead ECG, blood pressure monitoring, chest discomfort checkups, and heart health advice by cardiologists.</p>
           </div>
           <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
             Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Specialty 3 -->
+        <div class="apple-card rounded-2xl p-6 flex flex-col justify-between scroll-reveal delay-3">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-4">
-              <i data-lucide="scan" class="w-5 h-5"></i>
-            </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">3T MRI &amp; Ultrasound Diagnostics</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">High-field magnetic resonance imaging, acoustic sonography, and rapid digital pathology reporting.</p>
-          </div>
-          <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
-            Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </a>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+            <div class="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 border border-amber-100">
               <i data-lucide="baby" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">Pediatrics &amp; Child Health</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Developmental milestones, immunizations, and child-friendly acute symptom examinations.</p>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Children's Care &amp; Vaccines</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Gentle checkups for infants and children, fever, cold, stomach aches, healthy growth tracking, and all timely childhood vaccines.</p>
           </div>
           <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
             Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Specialty 4 -->
+        <div class="apple-card rounded-2xl p-6 flex flex-col justify-between scroll-reveal delay-4">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-4 border border-cyan-100">
+              <i data-lucide="scan" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Digital 3T MRI &amp; Ultrasound</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Fast, comfortable digital scans for head, spine, abdomen, and joints. Complete image and doctor report within hours.</p>
+          </div>
+          <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
+            Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <!-- Specialty 5 -->
+        <div class="apple-card rounded-2xl p-6 flex flex-col justify-between scroll-reveal delay-5">
+          <div>
+            <div class="w-11 h-11 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
               <i data-lucide="activity" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">Women’s Health &amp; Longevity</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Gynecological checkups, prenatal sonography, hormonal balance, and preventative screenings.</p>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Mother &amp; Women’s Health</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Pregnancy ultrasound checks, safe prenatal guidance, hormone balance, and routine women's health checkups in complete privacy.</p>
           </div>
           <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
             Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
 
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Specialty 6 -->
+        <div class="apple-card rounded-2xl p-6 flex flex-col justify-between scroll-reveal delay-6">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
+            <div class="w-11 h-11 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
               <i data-lucide="shield-check" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">Preventive Medicine &amp; Health Check</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Executive health assessments, full-body cardiovascular mapping, and chronic condition plans.</p>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Full-Body Wellness Packages</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Comprehensive annual health checkups covering blood, sugar, liver, kidney, ECG, and doctor review with transparent flat fees.</p>
           </div>
           <a href="specialties.html" class="text-xs font-bold text-blue-600 hover:underline pt-4 flex items-center gap-1">
             Learn More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
+
       </div>
     </section>
 
     <!-- ============================================================
-         4. ATTENDING PHYSICIANS
+         4. EXPERIENCED DOCTORS WITH DETAILED SPECIFICATIONS
     ============================================================ -->
-    <section class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+    <section id="doctors" class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 scroll-reveal">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Medical Board</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Our Medical Team</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Senior Attending Physicians
+            Meet Our Senior Doctors
           </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Experienced, board-certified specialists ready to care for you and your family.</p>
         </div>
         <a href="doctors.html" class="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
-          <span>View all clinicians</span>
+          <span>View full credentials</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- Doctor 1 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Doctor 1: Dr. Maria Kovalenko -->
+        <div class="apple-card rounded-3xl p-5 flex flex-col justify-between scroll-reveal delay-1">
           <div>
-            <div class="w-full h-56 rounded-xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center">
+            <div class="relative w-full h-56 rounded-2xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center border border-slate-100">
               <img src="assets/images/hero-doctor.png" alt="Dr. Maria Kovalenko" class="max-h-full w-auto object-contain" onerror="this.src='assets/images/hero-doctor.jpg'">
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full">
+                Available Mon–Sat
+              </span>
             </div>
-            <h3 class="text-base font-bold text-slate-900">Dr. Maria Kovalenko, MD</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Internal Medicine &bull; 14 Yrs</p>
+            
+            <h3 class="text-base font-bold text-slate-900">Dr. Maria Kovalenko</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-0.5">Senior Family Physician &bull; 14+ Yrs</p>
+
+            <div class="mt-3 pt-3 border-t border-slate-100 space-y-2 text-[11px] text-slate-600">
+              <div>
+                <span class="text-slate-400 font-medium">Degrees:</span>
+                <span class="font-semibold text-slate-800">MBBS, MD (Internal Medicine)</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Languages:</span>
+                <span class="font-semibold text-slate-800">English, Hindi, Ukrainian</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Treats:</span>
+                <span class="text-slate-700">Blood Pressure, Diabetes, Fever, Cough, Thyroid</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Hours:</span>
+                <span class="font-semibold text-slate-800">09:00 AM – 01:30 PM</span>
+              </div>
+            </div>
           </div>
-          <button onclick="openBookingModal('Internal Medicine', 'Dr. Maria Kovalenko, MD')" class="w-full btn-primary text-white py-2 rounded-xl text-xs font-bold mt-4 cursor-pointer">
-            Book Appointment
-          </button>
+
+          <div class="pt-4 border-t border-slate-100 mt-4">
+            <div class="flex items-center justify-between text-xs mb-3">
+              <span class="text-slate-400">Consultation Fee:</span>
+              <span class="font-extrabold text-slate-900 text-sm">$25 flat</span>
+            </div>
+            <button onclick="openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD')" class="w-full btn-primary text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Book Appointment</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- Doctor 2 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Doctor 2: Dr. Alexander Chen -->
+        <div class="apple-card rounded-3xl p-5 flex flex-col justify-between scroll-reveal delay-2">
           <div>
-            <div class="w-full h-56 rounded-xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center">
+            <div class="relative w-full h-56 rounded-2xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center border border-slate-100">
               <img src="assets/images/doc-chen.jpg" alt="Dr. Alexander Chen" class="max-h-full w-auto object-contain">
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full">
+                Heart Center
+              </span>
             </div>
-            <h3 class="text-base font-bold text-slate-900">Dr. Alexander Chen, MD</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Cardiology &bull; 16 Yrs</p>
+
+            <h3 class="text-base font-bold text-slate-900">Dr. Alexander Chen</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-0.5">Chief Heart Specialist &bull; 16+ Yrs</p>
+
+            <div class="mt-3 pt-3 border-t border-slate-100 space-y-2 text-[11px] text-slate-600">
+              <div>
+                <span class="text-slate-400 font-medium">Degrees:</span>
+                <span class="font-semibold text-slate-800">MD (Cardiology), FACC</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Languages:</span>
+                <span class="font-semibold text-slate-800">English, Ukrainian</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Treats:</span>
+                <span class="text-slate-700">Chest Pain, Palpitations, Hypertension, ECG</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Hours:</span>
+                <span class="font-semibold text-slate-800">10:00 AM – 03:00 PM (M, W, F)</span>
+              </div>
+            </div>
           </div>
-          <button onclick="openBookingModal('Cardiology & Heart Center', 'Dr. Alexander Chen, MD')" class="w-full btn-primary text-white py-2 rounded-xl text-xs font-bold mt-4 cursor-pointer">
-            Book Appointment
-          </button>
+
+          <div class="pt-4 border-t border-slate-100 mt-4">
+            <div class="flex items-center justify-between text-xs mb-3">
+              <span class="text-slate-400">Consultation Fee:</span>
+              <span class="font-extrabold text-slate-900 text-sm">$35 flat</span>
+            </div>
+            <button onclick="openBookingModal('Cardiology & Heart Care', 'Dr. Alexander Chen, MD')" class="w-full btn-primary text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Book Appointment</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- Doctor 3 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Doctor 3: Dr. Sarah Jensen -->
+        <div class="apple-card rounded-3xl p-5 flex flex-col justify-between scroll-reveal delay-3">
           <div>
-            <div class="w-full h-56 rounded-xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center">
+            <div class="relative w-full h-56 rounded-2xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center border border-slate-100">
               <img src="assets/images/doc-jensen.jpg" alt="Dr. Sarah Jensen" class="max-h-full w-auto object-contain">
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full">
+                Child Clinic
+              </span>
             </div>
-            <h3 class="text-base font-bold text-slate-900">Dr. Sarah Jensen, MD</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Pediatrics &bull; 12 Yrs</p>
+
+            <h3 class="text-base font-bold text-slate-900">Dr. Sarah Jensen</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-0.5">Senior Child Specialist &bull; 12+ Yrs</p>
+
+            <div class="mt-3 pt-3 border-t border-slate-100 space-y-2 text-[11px] text-slate-600">
+              <div>
+                <span class="text-slate-400 font-medium">Degrees:</span>
+                <span class="font-semibold text-slate-800">MD (Pediatrics), DCH</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Languages:</span>
+                <span class="font-semibold text-slate-800">English, Ukrainian</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Treats:</span>
+                <span class="text-slate-700">Child Fever, Cold, Growth Milestones, Vaccines</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Hours:</span>
+                <span class="font-semibold text-slate-800">08:30 AM – 01:00 PM (Mon–Sat)</span>
+              </div>
+            </div>
           </div>
-          <button onclick="openBookingModal('Pediatrics & Infant Care', 'Dr. Sarah Jensen, MD')" class="w-full btn-primary text-white py-2 rounded-xl text-xs font-bold mt-4 cursor-pointer">
-            Book Appointment
-          </button>
+
+          <div class="pt-4 border-t border-slate-100 mt-4">
+            <div class="flex items-center justify-between text-xs mb-3">
+              <span class="text-slate-400">Consultation Fee:</span>
+              <span class="font-extrabold text-slate-900 text-sm">$25 flat</span>
+            </div>
+            <button onclick="openBookingModal('Pediatrics & Infant Care', 'Dr. Sarah Jensen, MD')" class="w-full btn-primary text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Book Appointment</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- Doctor 4 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Doctor 4: Dr. Viktor Novak -->
+        <div class="apple-card rounded-3xl p-5 flex flex-col justify-between scroll-reveal delay-4">
           <div>
-            <div class="w-full h-56 rounded-xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center">
+            <div class="relative w-full h-56 rounded-2xl overflow-hidden bg-slate-50 mb-4 flex items-end justify-center border border-slate-100">
               <img src="assets/images/doc-novak.jpg" alt="Dr. Viktor Novak" class="max-h-full w-auto object-contain">
+              <span class="absolute top-2.5 right-2.5 text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded-full">
+                Imaging &amp; MRI
+              </span>
             </div>
-            <h3 class="text-base font-bold text-slate-900">Dr. Viktor Novak, MD, PhD</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Radiology &bull; 18 Yrs</p>
+
+            <h3 class="text-base font-bold text-slate-900">Dr. Viktor Novak</h3>
+            <p class="text-xs text-blue-600 font-semibold mt-0.5">Head of Scans &amp; MRI &bull; 18+ Yrs</p>
+
+            <div class="mt-3 pt-3 border-t border-slate-100 space-y-2 text-[11px] text-slate-600">
+              <div>
+                <span class="text-slate-400 font-medium">Degrees:</span>
+                <span class="font-semibold text-slate-800">MD, PhD (Diagnostic Radiology)</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Languages:</span>
+                <span class="font-semibold text-slate-800">English, Ukrainian, German</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Expertise:</span>
+                <span class="text-slate-700">3T MRI, Digital Ultrasound, X-Ray Reporting</span>
+              </div>
+              <div>
+                <span class="text-slate-400 font-medium">Reports:</span>
+                <span class="font-semibold text-slate-800">Fast 2-Hour Digital Delivery</span>
+              </div>
+            </div>
           </div>
-          <button onclick="openBookingModal('3T High-Field MRI & Lab', 'Dr. Viktor Novak, MD, PhD')" class="w-full btn-primary text-white py-2 rounded-xl text-xs font-bold mt-4 cursor-pointer">
-            Book Appointment
-          </button>
+
+          <div class="pt-4 border-t border-slate-100 mt-4">
+            <div class="flex items-center justify-between text-xs mb-3">
+              <span class="text-slate-400">Scan Booking:</span>
+              <span class="font-extrabold text-slate-900 text-sm">Same-Day Slot</span>
+            </div>
+            <button onclick="openBookingModal('3T Digital MRI & Lab', 'Dr. Viktor Novak, MD, PhD')" class="w-full btn-primary text-white py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>Book Scan / Test</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -603,8 +776,8 @@
             <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-4">
               <i data-lucide="shield-check" class="w-5 h-5"></i>
             </div>
-            <h3 class="text-base font-bold text-slate-900 mb-1.5">Insurance In-Network</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">Direct billing with major insurers with clear, upfront copay explanation.</p>
+            <h3 class="text-base font-bold text-slate-900 mb-1.5">Clear &amp; Honest Fees</h3>
+            <p class="text-xs text-slate-500 leading-relaxed">Flat transparent rates for every visit with zero hidden charges or surprise medicine costs.</p>
           </div>
 
         </div>
@@ -613,237 +786,160 @@
     </section>
 
     <!-- ============================================================
-         7. INSURANCE CHECKER
+         7. TRANSPARENT CLINICAL CARE PLANS (APPLE-GRADE PRICING)
     ============================================================ -->
-    <section id="insurance" class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10">
-      <div class="bg-slate-50 rounded-3xl p-8 sm:p-12 border border-slate-200">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          <div class="lg:col-span-6 space-y-3">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-              <span>Insurance &amp; Billing Transparency</span>
-            </div>
-
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Accepted Health Insurance Plans
-            </h2>
-
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              We partner directly with leading health insurance providers. Select your carrier to check your in-network copay estimates and coverage.
-            </p>
-
-            <div class="pt-2 flex items-center gap-6 text-xs text-slate-500">
-              <span class="flex items-center gap-1.5">
-                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> HSA / FSA Eligible
-              </span>
-              <span class="flex items-center gap-1.5">
-                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Direct Claim Submissions
-              </span>
-            </div>
-          </div>
-
-          <!-- Interactive Plan Selection Card -->
-          <div class="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                Select Insurance Carrier
-              </label>
-              <select 
-                id="insPlanSelect"
-                onchange="updateInsurancePlan(this.value)"
-                class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm font-semibold outline-none focus:bg-white focus:border-blue-500 transition-all cursor-pointer"
-              >
-                <option value="Blue Cross Blue Shield">Blue Cross Blue Shield</option>
-                <option value="Aetna PPO & POS">Aetna PPO &amp; POS</option>
-                <option value="UnitedHealthcare">UnitedHealthcare</option>
-                <option value="Cigna Open Access">Cigna Open Access</option>
-                <option value="Medicare Part B & Advantage">Medicare Part B &amp; Advantage</option>
-                <option value="Humana Premier">Humana Premier</option>
-                <option value="Direct Concierge Self-Pay">Self-Pay / Direct Patient</option>
-              </select>
-            </div>
-
-            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200/80 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs text-slate-500 font-medium">Status:</span>
-                <span id="insTierBadge" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                  Tier 1 In-Network
-                </span>
-              </div>
-              <div class="flex items-center justify-between text-xs">
-                <span class="text-slate-500 font-medium">Estimated Copay:</span>
-                <span id="insCopayVal" class="font-bold text-slate-900">$20 &ndash; $35</span>
-              </div>
-              <p id="insDescText" class="text-[11px] text-slate-500 pt-1 border-t border-slate-200">
-                100% covered for preventative &amp; annual executive checkups.
-              </p>
-            </div>
-
-            <button 
-              onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
-              class="w-full btn-primary text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span id="insBookBtnText">Schedule Appointment With Insurance</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================================
-         8. TRANSPARENT CONSULTATION FEES
-    ============================================================ -->
-    <section id="pricing" class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10">
+    <section id="pricing" class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 scroll-reveal">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Pricing Transparency</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Honest &amp; Transparent</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Consultation &amp; Care Options
+            Simple, Affordable Care Plans
           </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Know exactly what you pay before you step inside. No surprise charges ever.</p>
         </div>
-
-        <!-- Toggle -->
-        <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-full border border-slate-200">
-          <button 
-            id="pricingBtnInsurance"
-            onclick="setPricingMode('insurance')"
-            class="px-5 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-900 shadow-xs cursor-pointer"
-          >
-            In-Network Copay
-          </button>
-          <button 
-            id="pricingBtnSelf"
-            onclick="setPricingMode('selfpay')"
-            class="px-5 py-2 rounded-full text-xs font-bold transition-all text-slate-500 hover:text-slate-900 cursor-pointer"
-          >
-            Direct Self-Pay
-          </button>
+        <div class="text-xs text-slate-500 font-medium flex items-center gap-1.5">
+          <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+          <span>Free 7-Day Follow-Up Message Access</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
         
-        <!-- Tier 1 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Plan 1: Basic Doctor Consultation -->
+        <div class="apple-card rounded-3xl p-7 flex flex-col justify-between scroll-reveal delay-1">
           <div>
-            <span class="text-xs font-bold text-blue-600">Standard Consultation</span>
-            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">Primary Care Visit</h3>
-            <p class="text-xs text-slate-500 mb-6">Comprehensive examination with a board-certified physician for general health or acute symptoms.</p>
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Everyday Care</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-3 mb-2">Doctor Visit &amp; Checkup</h3>
+            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Ideal when you have a fever, cough, stomach trouble, body pain, or need a routine blood pressure and sugar check.</p>
 
             <div class="mb-6 pb-6 border-b border-slate-100">
               <div class="flex items-baseline gap-1">
-                <span id="pricingTier1Price" class="text-3xl font-extrabold text-slate-900">$20</span>
-                <span id="pricingTier1Sub" class="text-xs text-slate-400 font-medium">In-Network Copay</span>
+                <span class="text-4xl font-extrabold text-slate-900">$25</span>
+                <span class="text-xs text-slate-400 font-medium">/ flat visit fee</span>
               </div>
+              <p class="text-[11px] text-emerald-600 font-semibold mt-1">✓ Complete physician examination included</p>
             </div>
 
-            <ul class="space-y-2.5 text-xs text-slate-600 mb-6">
-              <li class="flex items-center gap-2">
+            <ul class="space-y-3 text-xs text-slate-600 mb-6">
+              <li class="flex items-center gap-2.5">
                 <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>Physician examination</span>
+                <span>One-on-one consultation with senior doctor</span>
               </li>
-              <li class="flex items-center gap-2">
+              <li class="flex items-center gap-2.5">
                 <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>Electronic prescription routing</span>
+                <span>Blood pressure, oxygen &amp; pulse check</span>
               </li>
-              <li class="flex items-center gap-2">
+              <li class="flex items-center gap-2.5">
                 <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>7-Day direct doctor messaging</span>
+                <span>Clear digital medicine prescription on phone</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                <span>7-Day free doctor follow-up chat</span>
               </li>
             </ul>
           </div>
 
           <button 
-            onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
-            class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer"
+            onclick="openBookingModal('General Doctor Visit', 'Dr. Maria Kovalenko, MD')"
+            class="w-full py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer"
           >
-            Select Standard Visit
+            Select Doctor Visit
           </button>
         </div>
 
-        <!-- Tier 2: Highlighted with clean blue border -->
-        <div class="bg-white rounded-2xl p-6 border-2 border-blue-600 shadow-sm flex flex-col justify-between relative">
-          <div class="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-            Recommended
+        <!-- Plan 2: Complete Family Checkup (Apple Featured Card with Subtle Ambient Glow) -->
+        <div class="apple-card-featured rounded-3xl p-7 flex flex-col justify-between relative scroll-reveal delay-2">
+          <div class="absolute -top-3.5 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
+            Most Popular &bull; Best Value
           </div>
 
           <div>
-            <span class="text-xs font-bold text-blue-600">Comprehensive Program</span>
-            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">Annual Executive Physical</h3>
-            <p class="text-xs text-slate-500 mb-6">Full longevity assessment, resting ECG, blood biomarker panel, and physician review.</p>
+            <span class="text-xs font-bold text-blue-700 bg-blue-100/70 px-3 py-1 rounded-full border border-blue-200">Full Family Checkup</span>
+            <h3 class="text-xl font-extrabold text-slate-900 mt-3 mb-2">Complete Health Package</h3>
+            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Our most recommended package for adults and parents. Covers full blood tests, heart ECG, and in-depth doctor review.</p>
 
             <div class="mb-6 pb-6 border-b border-slate-100">
               <div class="flex items-baseline gap-1">
-                <span id="pricingTier2Price" class="text-3xl font-extrabold text-blue-600">$0 &ndash; $50</span>
-                <span id="pricingTier2Sub" class="text-xs text-slate-400 font-medium">Covered Annual Wellness</span>
+                <span class="text-4xl font-extrabold text-blue-600">$69</span>
+                <span class="text-xs text-slate-400 font-medium">/ all-inclusive fee</span>
               </div>
+              <p class="text-[11px] text-blue-600 font-semibold mt-1">✓ Includes 25 Essential Blood Lab Tests + ECG</p>
             </div>
 
-            <ul class="space-y-2.5 text-xs text-slate-600 mb-6">
-              <li class="flex items-center gap-2">
+            <ul class="space-y-3 text-xs text-slate-700 mb-6">
+              <li class="flex items-center gap-2.5 font-medium">
                 <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0"></i>
-                <span>60-Minute Senior Physician Consultation</span>
+                <span>45-Minute thorough physical exam</span>
               </li>
-              <li class="flex items-center gap-2">
+              <li class="flex items-center gap-2.5 font-medium">
                 <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0"></i>
-                <span>12-Lead ECG &amp; Metabolic Blood Panel</span>
+                <span>Resting 12-lead ECG heart test</span>
               </li>
-              <li class="flex items-center gap-2">
+              <li class="flex items-center gap-2.5 font-medium">
                 <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0"></i>
-                <span>12-Month personalized preventive health plan</span>
+                <span>Complete Blood Test (Sugar, Lipid, CBC, Liver, Kidney)</span>
+              </li>
+              <li class="flex items-center gap-2.5 font-medium">
+                <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0"></i>
+                <span>Simple diet, nutrition &amp; medicine guide</span>
+              </li>
+              <li class="flex items-center gap-2.5 font-medium">
+                <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0"></i>
+                <span>Same-day digital report sent via SMS/WhatsApp</span>
               </li>
             </ul>
           </div>
 
           <button 
-            onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
-            class="w-full btn-primary text-white py-2.5 rounded-xl font-bold text-xs shadow-xs cursor-pointer"
+            onclick="openBookingModal('Complete Health Package ($69)', 'Dr. Maria Kovalenko, MD')"
+            class="w-full btn-primary text-white py-3.5 rounded-2xl font-bold text-xs shadow-md shadow-blue-600/25 cursor-pointer"
           >
-            Schedule Physical
+            Book Complete Checkup ($69)
           </button>
         </div>
 
-        <!-- Tier 3 -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <!-- Plan 3: Senior Citizen & Heart Wellness -->
+        <div class="apple-card rounded-3xl p-7 flex flex-col justify-between scroll-reveal delay-3">
           <div>
-            <span class="text-xs font-bold text-purple-600">Priority Program</span>
-            <h3 class="text-lg font-bold text-slate-900 mt-1 mb-2">Concierge Care Membership</h3>
-            <p class="text-xs text-slate-500 mb-6">Continuous primary care, direct physician phone access, and priority same-day scheduling.</p>
+            <span class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full border border-purple-100">Elderly &amp; Heart Care</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-3 mb-2">Senior Citizen &amp; Heart Care</h3>
+            <p class="text-xs text-slate-500 mb-6 leading-relaxed">Specially designed for parents and elders. Deep cardiovascular examination, joint mobility review, and medicine safety check.</p>
 
             <div class="mb-6 pb-6 border-b border-slate-100">
               <div class="flex items-baseline gap-1">
-                <span class="text-3xl font-extrabold text-slate-900">$99</span>
-                <span class="text-xs text-slate-400 font-medium">/ month</span>
+                <span class="text-4xl font-extrabold text-slate-900">$119</span>
+                <span class="text-xs text-slate-400 font-medium">/ comprehensive session</span>
               </div>
+              <p class="text-[11px] text-purple-600 font-semibold mt-1">✓ Cardiologist + General Physician Review</p>
             </div>
 
-            <ul class="space-y-2.5 text-xs text-slate-600 mb-6">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>Priority same-day clinic appointments</span>
+            <ul class="space-y-3 text-xs text-slate-600 mb-6">
+              <li class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-purple-600 shrink-0"></i>
+                <span>Comprehensive heart ECG &amp; Ultrasound screening</span>
               </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>Annual comprehensive executive health assessment</span>
+              <li class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-purple-600 shrink-0"></i>
+                <span>Joint, knee &amp; mobility assessment</span>
               </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                <span>Direct physician messaging access</span>
+              <li class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-purple-600 shrink-0"></i>
+                <span>Complete daily medication safety review</span>
+              </li>
+              <li class="flex items-center gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-purple-600 shrink-0"></i>
+                <span>Zero-wait priority arrival for seniors</span>
               </li>
             </ul>
           </div>
 
           <button 
-            onclick="openBookingModal('Primary & Family Care', 'Dr. Maria Kovalenko, MD')"
-            class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer"
+            onclick="openBookingModal('Senior Citizen & Heart Care ($119)', 'Dr. Alexander Chen, MD')"
+            class="w-full py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer"
           >
-            Apply for Membership
+            Select Senior Care ($119)
           </button>
         </div>
 
@@ -851,206 +947,248 @@
     </section>
 
     <!-- ============================================================
-         9. EXPANDED VERIFIED PATIENT STORIES & REVIEWS (8 REVIEWS)
+         8. VERIFIED GOOGLE PATIENT REVIEWS & REAL STORIES
     ============================================================ -->
-    <section id="reviews" class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10">
+    <section id="reviews" class="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 scroll-reveal">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Patient Feedback</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Verified Patient Stories &amp; Clinical Outcomes
+          <div class="flex items-center gap-2 mb-1.5">
+            <!-- Google Logo Icon -->
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+            </svg>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-700">Google Verified Patient Feedback</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Real Stories From Real Families
           </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Over 1,400 genuine patients have shared their recovery experiences.</p>
         </div>
         <a href="reviews.html" class="text-xs sm:text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
-          <span>Read all verified reviews</span>
+          <span>Read all patient reviews</span>
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
 
-      <!-- 8 Patient Review Cards Grid -->
+      <!-- 8 Google Verified Patient Review Cards Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Review 1 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-1">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">3 days ago</span>
             </div>
-            <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">Metabolic Care</span>
+            <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">Sugar &amp; BP Care</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;Dr. Maria spent 45 minutes walking through my lipid metrics. My HbA1c went from 8.8 to 6.2 in 90 days with her personalized care plan.&rdquo;
+              &ldquo;I took my mother for high blood sugar. Dr. Maria explained everything so patiently in simple words without confusing medical terms. In one month, her sugar came down to normal!&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Ramesh Kumar</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 2 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-2">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">1 week ago</span>
             </div>
-            <span class="text-[11px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md">Cardiology &amp; ECG</span>
+            <span class="text-[11px] font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full">Heart &amp; ECG</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;Zero waiting room delay. I arrived on time and was in the room within 5 minutes. Dr. Chen gave clear, reassuring explanations.&rdquo;
+              &ldquo;Zero waiting line. We arrived at 10 AM, and by 10:05 AM Dr. Chen was examining my chest and doing the ECG. Very caring and polite staff with honest fees.&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Olena Petrenko</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 3 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-3">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">2 weeks ago</span>
             </div>
-            <span class="text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md">Pediatric Health</span>
+            <span class="text-[11px] font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full">Children's Care</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;Dr. Sarah Jensen was extraordinarily gentle and caring with my daughter. The clinic environment is spotless, calm, and kid-friendly.&rdquo;
+              &ldquo;My 4-year-old daughter was crying with high fever. Dr. Sarah Jensen was so gentle and friendly that my child didn't even cry during checkup. The medicine worked quickly!&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Priya Sharma</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 4 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-4">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">3 weeks ago</span>
             </div>
-            <span class="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md">3T MRI Suite</span>
+            <span class="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2.5 py-0.5 rounded-full">Fast 3T MRI Scan</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;The MRI suite was quiet and comfortable. Dr. Novak had the imaging report and high-res scans delivered to my phone the very same afternoon.&rdquo;
+              &ldquo;I needed a knee MRI after an accident. The scan suite was quiet, clean, and comfortable. Dr. Novak sent the full report directly to my WhatsApp within two hours!&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Andrii Shevchenko</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 5 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-5">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">Last month</span>
             </div>
-            <span class="text-[11px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">Prenatal Care</span>
+            <span class="text-[11px] font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full">Pregnancy Ultrasound</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;From regular obstetric ultrasound checks to birth planning, Dr. Nataliia Bondar offered warm, evidence-based guidance every step of the way.&rdquo;
+              &ldquo;Got all my pregnancy sonography checks done here. The doctor was so respectful, showed us our baby's heartbeat clearly, and answered all our doubts with patience.&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Kateryna Moroz</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 6 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-6">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">1 month ago</span>
             </div>
-            <span class="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">Joint Mobility</span>
+            <span class="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full">Joint &amp; Knee Relief</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;After struggling with chronic knee stiffness, the targeted physical rehabilitation program helped me regain comfortable walking in just 6 weeks.&rdquo;
+              &ldquo;Severe knee stiffness made it painful to climb stairs. The exercise program and medicine prescribed helped me walk comfortably without pain in just four weeks.&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Taras Kovalchuk</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 7 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-7">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">1 month ago</span>
             </div>
-            <span class="text-[11px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md">Executive Physical</span>
+            <span class="text-[11px] font-bold text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full">Full Health Package</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;The executive physical was the most thorough checkup of my life. 40 biomarker tests and an ECG conducted seamlessly in a single visit.&rdquo;
+              &ldquo;The $69 package was the best health decision of my year. Covered all 25 blood tests, ECG, and consultation in one coordinated morning. Clean and fast!&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">David Miller</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
 
         <!-- Review 8 -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div class="apple-card rounded-3xl p-6 flex flex-col justify-between scroll-reveal delay-8">
           <div>
-            <div class="flex text-amber-500 gap-0.5 mb-2">
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
-              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500"></i>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-500 gap-0.5">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">2 months ago</span>
             </div>
-            <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">Urgent Refill &amp; Care</span>
+            <span class="text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">Urgent Medicine Refill</span>
             <p class="text-xs text-slate-600 leading-relaxed mt-3 mb-4">
-              &ldquo;Needed an urgent prescription adjustment while traveling. The clinic desk accommodated me immediately with zero paperwork hassle.&rdquo;
+              &ldquo;Needed my blood pressure medicine while visiting from out of town. The front desk took care of me right away and the doctor wrote my refill in 10 minutes.&rdquo;
             </p>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span class="font-bold text-slate-800">Svitlana Boyko</span>
-            <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google Verified
             </span>
           </div>
         </div>
@@ -1059,63 +1197,64 @@
     </section>
 
     <!-- ============================================================
-         10. FREQUENTLY ASKED QUESTIONS
+         9. FREQUENTLY ASKED QUESTIONS (SIMPLE EVERYDAY ANSWERS)
     ============================================================ -->
-    <section id="faq" class="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-10">
-      <div class="text-center mb-8">
-        <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Patient Support</span>
+    <section id="faq" class="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto py-12">
+      <div class="text-center mb-8 scroll-reveal">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Got Questions?</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-          Frequently Asked Questions
+          Simple Answers For Patients &amp; Families
         </h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">Everything you need to know before visiting our clinic.</p>
       </div>
 
-      <div class="space-y-3">
+      <div class="space-y-3 scroll-reveal delay-1">
         
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
           <button onclick="toggleFAQ('home-1')" class="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
-            <span>Do you accept commercial insurance and Medicare?</span>
+            <span>How quickly can I see a doctor when I arrive?</span>
             <i data-lucide="chevron-down" id="faq-icon-home-1" class="w-4 h-4 text-slate-400 transition-transform"></i>
           </button>
           <div id="faq-answer-home-1" class="hidden px-5 pb-4 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-            Yes, we are in-network with Blue Cross Blue Shield, Aetna, UnitedHealthcare, Cigna, Medicare Part B &amp; Advantage, Humana, and major commercial health plans. We also accept direct HSA/FSA payments.
+            Our average wait time is under 8 minutes. When you book a time, your slot is saved with your attending doctor with no long lines.
           </div>
         </div>
 
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
           <button onclick="toggleFAQ('home-2')" class="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
-            <span>How quickly can I see a doctor today?</span>
+            <span>Can I walk in directly without an appointment?</span>
             <i data-lucide="chevron-down" id="faq-icon-home-2" class="w-4 h-4 text-slate-400 transition-transform"></i>
           </button>
           <div id="faq-answer-home-2" class="hidden px-5 pb-4 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-            In-person same-day appointments are available with average wait times under 8 minutes through our scheduled arrival intake.
+            Yes! Walk-in patients are always welcomed. Our front reception will quickly assign you to the next available physician with minimal waiting.
           </div>
         </div>
 
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
           <button onclick="toggleFAQ('home-3')" class="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
-            <span>What diagnostic testing is performed on-site?</span>
+            <span>How do I receive my blood test and MRI scan reports?</span>
             <i data-lucide="chevron-down" id="faq-icon-home-3" class="w-4 h-4 text-slate-400 transition-transform"></i>
           </button>
           <div id="faq-answer-home-3" class="hidden px-5 pb-4 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-            We perform 12-lead resting ECG, high-field 3T MRI scans, acoustic ultrasound, and automated blood laboratory panels with same-day digital report delivery.
+            All test reports and high-resolution scan images are delivered directly to your mobile phone via SMS or WhatsApp, and printed copies are available immediately at our reception desk.
           </div>
         </div>
 
-        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
           <button onclick="toggleFAQ('home-4')" class="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-bold text-sm text-slate-900 hover:text-blue-600 transition-colors cursor-pointer">
-            <span>How do I receive test results and electronic prescriptions?</span>
+            <span>What are your consultation charges and payment methods?</span>
             <i data-lucide="chevron-down" id="faq-icon-home-4" class="w-4 h-4 text-slate-400 transition-transform"></i>
           </button>
           <div id="faq-answer-home-4" class="hidden px-5 pb-4 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-            All diagnostic reports, high-resolution imaging scans, and doctor treatment notes are uploaded directly to your secure patient portal. Electronic prescriptions are automatically routed to your chosen pharmacy.
+            We believe in honest, transparent pricing with no surprise fees. A general doctor consultation is a flat $25. We accept cash, card, and digital phone payments.
           </div>
         </div>
-
       </div>
 
       <div class="text-center mt-6">
-        <a href="faq.html" class="text-xs font-bold text-blue-600 hover:underline">
-          View full FAQ knowledge base &rarr;
+        <a href="faq.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 hover:underline">
+          <span>View all frequently asked questions</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </a>
       </div>
     </section>
